@@ -6,11 +6,11 @@ namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
 class GetJobByGuidApiTest extends TestCase
 {
@@ -86,8 +86,8 @@ class GetJobByGuidApiTest extends TestCase
         $this->jobMapper->expects($this->never())
             ->method('mapFromArray');
 
-        $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessage('Job not found');
+        $this->expectException(JobNotFoundException::class);
+        $this->expectExceptionMessage(sprintf('Job with GUID "%s" not found', $jobGuid));
 
         $this->api->getJobByGuid($jobGuid);
     }
