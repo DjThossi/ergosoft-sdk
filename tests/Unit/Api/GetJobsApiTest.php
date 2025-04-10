@@ -28,58 +28,58 @@ class GetJobsApiTest extends TestCase
     {
         $expectedResponse = new Response(200, [], json_encode([
             [
-                'jobGuid' => 'test-guid-1',
-                'jobId' => '12345',
-                'jobName' => 'Test Job 1',
-                'jobStatus' => 'RUNNING',
-                'jobStatusDescription' => 'Job is running',
-                'copies' => 1,
-                'timeCreated' => '2023-01-01T12:00:00Z',
-                'jobWidthMm' => 100,
-                'jobLengthMm' => 200,
-                'mediaWidthMm' => 100,
-                'mediaLengthMm' => 200,
-                'copiesPrinted' => 1,
-                'printSecElapsed' => 10,
-                'printSecRemaining' => 20,
-                'timePrinted' => '2023-01-01T12:30:00Z',
-                'copiesPrintedBefore' => 0,
-                'printEnv' => 'PRINT_ENV',
-                'owner' => 'admin',
-                'printerId' => 'printer-1',
-                'mediaType' => 'vinyl',
-                'ppVersion' => '1.0',
-                'customerInfo' => 'Customer Info',
-                'preRippedInfo' => 'Pre-Ripped Info',
-                'journal' => 'Journal'
+                JobMapper::FIELD_JOB_GUID => 'test-guid-1',
+                JobMapper::FIELD_JOB_ID => '12345',
+                JobMapper::FIELD_JOB_NAME => 'Test Job 1',
+                JobMapper::FIELD_JOB_STATUS => 'RUNNING',
+                JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is running',
+                JobMapper::FIELD_COPIES => 1,
+                JobMapper::FIELD_TIME_CREATED => '2023-01-01T12:00:00Z',
+                JobMapper::FIELD_JOB_WIDTH_MM => 100,
+                JobMapper::FIELD_JOB_LENGTH_MM => 200,
+                JobMapper::FIELD_MEDIA_WIDTH_MM => 100,
+                JobMapper::FIELD_MEDIA_LENGTH_MM => 200,
+                JobMapper::FIELD_COPIES_PRINTED => 1,
+                JobMapper::FIELD_PRINT_SEC_ELAPSED => 10,
+                JobMapper::FIELD_PRINT_SEC_REMAINING => 20,
+                JobMapper::FIELD_TIME_PRINTED => '2023-01-01T12:30:00Z',
+                JobMapper::FIELD_COPIES_PRINTED_BEFORE => 0,
+                JobMapper::FIELD_PRINT_ENV => 'PRINT_ENV',
+                JobMapper::FIELD_OWNER => 'admin',
+                JobMapper::FIELD_PRINTER_ID => 'printer-1',
+                JobMapper::FIELD_MEDIA_TYPE => 'vinyl',
+                JobMapper::FIELD_PP_VERSION => '1.0',
+                JobMapper::FIELD_CUSTOMER_INFO => 'Customer Info',
+                JobMapper::FIELD_PRE_RIPPED_INFO => 'Pre-Ripped Info',
+                JobMapper::FIELD_JOURNAL => 'Journal',
             ],
             [
-                'jobGuid' => 'test-guid-2',
-                'jobId' => '67890',
-                'jobName' => 'Test Job 2',
-                'jobStatus' => 'DONE',
-                'jobStatusDescription' => 'Job is done',
-                'copies' => 2,
-                'timeCreated' => '2023-01-02T12:00:00Z',
-                'jobWidthMm' => 150,
-                'jobLengthMm' => 250,
-                'mediaWidthMm' => 150,
-                'mediaLengthMm' => 250,
-                'copiesPrinted' => 2,
-                'printSecElapsed' => 15,
-                'printSecRemaining' => 0,
-                'timePrinted' => '2023-01-02T12:45:00Z',
-                'copiesPrintedBefore' => 0,
-                'printEnv' => 'PRINT_ENV',
-                'owner' => 'admin',
-                'printerId' => 'printer-2',
-                'mediaType' => 'paper',
-                'ppVersion' => '1.0',
-                'customerInfo' => 'Customer Info',
-                'preRippedInfo' => 'Pre-Ripped Info',
-                'journal' => 'Journal'
-            ]
-        ], JSON_THROW_ON_ERROR));
+                JobMapper::FIELD_JOB_GUID => 'test-guid-2',
+                JobMapper::FIELD_JOB_ID => '67890',
+                JobMapper::FIELD_JOB_NAME => 'Test Job 2',
+                JobMapper::FIELD_JOB_STATUS => 'DONE',
+                JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is done',
+                JobMapper::FIELD_COPIES => 2,
+                JobMapper::FIELD_TIME_CREATED => '2023-01-02T12:00:00Z',
+                JobMapper::FIELD_JOB_WIDTH_MM => 150,
+                JobMapper::FIELD_JOB_LENGTH_MM => 250,
+                JobMapper::FIELD_MEDIA_WIDTH_MM => 150,
+                JobMapper::FIELD_MEDIA_LENGTH_MM => 250,
+                JobMapper::FIELD_COPIES_PRINTED => 2,
+                JobMapper::FIELD_PRINT_SEC_ELAPSED => 15,
+                JobMapper::FIELD_PRINT_SEC_REMAINING => 0,
+                JobMapper::FIELD_TIME_PRINTED => '2023-01-02T12:45:00Z',
+                JobMapper::FIELD_COPIES_PRINTED_BEFORE => 0,
+                JobMapper::FIELD_PRINT_ENV => 'PRINT_ENV',
+                JobMapper::FIELD_OWNER => 'admin',
+                JobMapper::FIELD_PRINTER_ID => 'printer-2',
+                JobMapper::FIELD_MEDIA_TYPE => 'paper',
+                JobMapper::FIELD_PP_VERSION => '1.0',
+                JobMapper::FIELD_CUSTOMER_INFO => 'Customer Info',
+                JobMapper::FIELD_PRE_RIPPED_INFO => 'Pre-Ripped Info',
+                JobMapper::FIELD_JOURNAL => 'Journal',
+            ],
+        ], \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -92,12 +92,13 @@ class GetJobsApiTest extends TestCase
         $this->jobMapper->expects($this->exactly(2))
             ->method('mapFromArray')
             ->willReturnCallback(function ($data) use ($job1, $job2) {
-                if ($data['jobGuid'] === 'test-guid-1') {
+                if ($data[JobMapper::FIELD_JOB_GUID] === 'test-guid-1') {
                     return $job1;
                 }
-                if ($data['jobGuid'] === 'test-guid-2') {
+                if ($data[JobMapper::FIELD_JOB_GUID] === 'test-guid-2') {
                     return $job2;
                 }
+
                 return null;
             });
 
@@ -110,7 +111,7 @@ class GetJobsApiTest extends TestCase
 
     public function testGetJobsEmpty(): void
     {
-        $expectedResponse = new Response(200, [], json_encode([], JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')

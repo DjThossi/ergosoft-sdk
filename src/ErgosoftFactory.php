@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk;
 
-use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
+use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 
@@ -14,11 +14,6 @@ readonly class ErgosoftFactory
     public function __construct(
         private string $baseUrl,
     ) {
-    }
-
-    private function createJobMapper(): JobMapper
-    {
-        return new JobMapper();
     }
 
     public function getJobsApi(): GetJobsApi
@@ -35,5 +30,10 @@ readonly class ErgosoftFactory
             new Client($this->baseUrl),
             $this->createJobMapper()
         );
+    }
+
+    private function createJobMapper(): JobMapper
+    {
+        return new JobMapper();
     }
 }

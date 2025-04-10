@@ -29,32 +29,32 @@ class GetJobByGuidApiTest extends TestCase
     {
         $jobGuid = 'test-job-guid';
         $responseJsonData = [
-            'jobGuid' => $jobGuid,
-            'jobId' => '12345',
-            'jobName' => 'Test Job',
-            'jobStatus' => 'RUNNING',
-            'jobStatusDescription' => 'Job is running',
-            'copies' => 1,
-            'timeCreated' => '2023-01-01T12:00:00Z',
-            'jobWidthMm' => 100,
-            'jobLengthMm' => 200,
-            'mediaWidthMm' => 100,
-            'mediaLengthMm' => 200,
-            'copiesPrinted' => 1,
-            'printSecElapsed' => 10,
-            'printSecRemaining' => 20,
-            'timePrinted' => '2023-01-01T12:30:00Z',
-            'copiesPrintedBefore' => 0,
-            'printEnv' => 'PRINT_ENV',
-            'owner' => 'admin',
-            'printerId' => 'printer-1',
-            'mediaType' => 'vinyl',
-            'ppVersion' => '1.0',
-            'customerInfo' => 'Customer Info',
-            'preRippedInfo' => 'Pre-Ripped Info',
-            'journal' => 'Journal'
+            JobMapper::FIELD_JOB_GUID => $jobGuid,
+            JobMapper::FIELD_JOB_ID => '12345',
+            JobMapper::FIELD_JOB_NAME => 'Test Job',
+            JobMapper::FIELD_JOB_STATUS => 'RUNNING',
+            JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is running',
+            JobMapper::FIELD_COPIES => 1,
+            JobMapper::FIELD_TIME_CREATED => '2023-01-01T12:00:00Z',
+            JobMapper::FIELD_JOB_WIDTH_MM => 100,
+            JobMapper::FIELD_JOB_LENGTH_MM => 200,
+            JobMapper::FIELD_MEDIA_WIDTH_MM => 100,
+            JobMapper::FIELD_MEDIA_LENGTH_MM => 200,
+            JobMapper::FIELD_COPIES_PRINTED => 1,
+            JobMapper::FIELD_PRINT_SEC_ELAPSED => 10,
+            JobMapper::FIELD_PRINT_SEC_REMAINING => 20,
+            JobMapper::FIELD_TIME_PRINTED => '2023-01-01T12:30:00Z',
+            JobMapper::FIELD_COPIES_PRINTED_BEFORE => 0,
+            JobMapper::FIELD_PRINT_ENV => 'PRINT_ENV',
+            JobMapper::FIELD_OWNER => 'admin',
+            JobMapper::FIELD_PRINTER_ID => 'printer-1',
+            JobMapper::FIELD_MEDIA_TYPE => 'vinyl',
+            JobMapper::FIELD_PP_VERSION => '1.0',
+            JobMapper::FIELD_CUSTOMER_INFO => 'Customer Info',
+            JobMapper::FIELD_PRE_RIPPED_INFO => 'Pre-Ripped Info',
+            JobMapper::FIELD_JOURNAL => 'Journal',
         ];
-        $expectedResponse = new Response(200, [], json_encode($responseJsonData, JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode($responseJsonData, \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -65,7 +65,7 @@ class GetJobByGuidApiTest extends TestCase
 
         $this->jobMapper->expects($this->once())
             ->method('mapFromArray')
-            ->with($this->callback(fn($data) => $data['jobGuid'] === $jobGuid))
+            ->with($this->callback(fn ($data) => $data[JobMapper::FIELD_JOB_GUID] === $jobGuid))
             ->willReturn($job);
 
         $result = $this->api->getJobByGuid($jobGuid);
@@ -76,7 +76,7 @@ class GetJobByGuidApiTest extends TestCase
     public function testGetJobByGuidNotFound(): void
     {
         $jobGuid = 'non-existent-guid';
-        $expectedResponse = new Response(200, [], json_encode([], JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -87,8 +87,8 @@ class GetJobByGuidApiTest extends TestCase
             ->method('mapFromArray');
 
         $this->expectException(JobNotFoundException::class);
-        $this->expectExceptionMessage(sprintf('Job with GUID "%s" not found', $jobGuid));
+        $this->expectExceptionMessage(\sprintf('Job with GUID "%s" not found', $jobGuid));
 
         $this->api->getJobByGuid($jobGuid);
     }
-} 
+}
