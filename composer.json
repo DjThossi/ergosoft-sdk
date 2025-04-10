@@ -1,0 +1,34 @@
+{
+    "name": "djthossi/ergosoft-sdk",
+    "description": "SDK for Ergosoft's XML API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastian Thoss",
+            "email": "dj_thossi@web.de",
+            "homepage": "http://www.sebastianthoss.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "guzzlehttp/guzzle": "^7.9",
+        "ext-json": "*",
+        "ext-xml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "friendsofphp/php-cs-fixer": "^3.75"
+    },
+    "autoload": {
+        "psr-4": {
+            "DjThossi\\ErgosoftSdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DjThossi\\ErgosoftSdk\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
