@@ -7,9 +7,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Factory initialisieren
-$factory = new ErgosoftFactory('http://192.168.1.2:50017');
-
-// JobApi über die Factory abrufen
+$factory = new ErgosoftFactory('https://YOUR_API_URL');
 $jobApi = $factory->getJobsApi();
 
 // Jobs abrufen

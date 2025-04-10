@@ -5,12 +5,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client
-$factory = new ErgosoftFactory('http://192.168.1.2:50017');
+$factory = new ErgosoftFactory('https://YOUR_API_URL');
 $jobApi = $factory->getJobByGuidApi();
 
 try {
     // Replace this with a valid job GUID
-    $jobGuid = 'b2589046-1589-40b8-a478-a61b692b326b';
+    $jobGuid = 'YOUR_JOB_GUID';
     $job = $jobApi->getJobByGuid($jobGuid);
 
     // Display job details
