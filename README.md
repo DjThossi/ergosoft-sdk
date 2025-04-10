@@ -56,3 +56,6 @@ Then add to your `.env.local` file:
 ```env
 ERGOSOFT_BASE_URL=https://YOUR-ERGOSOFT-URL
 ``` 
+
+## Contribute to this repo
+For more details click [here](CONTRIBUTING.md)
