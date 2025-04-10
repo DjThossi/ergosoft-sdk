@@ -20,7 +20,7 @@ php-cs-fix: ## Run Composer install
 	docker compose run --rm php sh -c "vendor/bin/php-cs-fixer fix"
 
 
-#PHP Latest Section. Latest means latest available on https://github.com/devgine/composer-php
+#PHP Latest Section. Latest means latest available on https://github.com/sineverba/php8xc
 .PHONY: phpLatest-composer-install
 phpLatest-composer-install: ## Run Composer install with PHP version Latest
 	docker compose run --rm php sh -c "composer install"
