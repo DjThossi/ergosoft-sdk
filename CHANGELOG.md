@@ -15,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-04-10
 
 ### Added
-- Add main Logic to support first Endpiont get-jobs
+- Add basic structure
+- Add Endpoint get-jobs
+- Add Endpoint get-job-by-guid
 
 [unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/1.0.0...HEAD
 [1.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/1.0.0
