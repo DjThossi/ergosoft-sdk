@@ -17,5 +17,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add main Logic to support first Endpiont get-jobs
 
-[unreleased]: https://github.com/DjThossi/shipcloud-sdk/compare/1.0.0...HEAD
-[1.0.0]: https://github.com/DjThossi/shipcloud-sdk/releases/tag/1.0.0
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/1.0.0
