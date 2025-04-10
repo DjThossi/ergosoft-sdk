@@ -41,3 +41,7 @@ phpLatest-test: ## Run phpunit with coverage with PHP version Latest
 .PHONY: examples-getJobs
 examples-getJobs: ## Runs the example code for the get-jobs API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/get-jobs.php
+
+.PHONY: examples-getJobByGuid
+examples-getJobByGuid: ## Runs the example code for the get-job-by-guid API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/get-job-by-guid.php

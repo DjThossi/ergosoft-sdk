@@ -6,58 +6,33 @@ namespace DjThossi\ErgosoftSdk\Api;
 
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Http\Client;
+use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use GuzzleHttp\Exception\GuzzleException;
+use JsonException;
 
-class GetJobsApi
+readonly class GetJobsApi
 {
     private const string ENDPOINT = '/Trickle/get-jobs';
 
     public function __construct(
-        private readonly Client $client,
+        private Client $client,
+        private JobMapper $jobMapper,
     ) {
     }
 
     /**
-     * @throws GuzzleException
-     *
+     * @throws GuzzleException|JsonException
      * @return Job[]
      */
     public function getJobs(): array
     {
         $response = $this->client->get(self::ENDPOINT);
-        $data = json_decode((string) $response->getBody(), true);
+        $data = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
         $jobs = [];
-        if (\is_array($data)) {
+        if (is_array($data)) {
             foreach ($data as $jobData) {
-                $jobs[] = new Job(
-                    $jobData['jobGuid'],
-                    (string) $jobData['jobId'],
-                    $jobData['jobName'],
-                    $jobData['jobStatus'],
-                    $jobData['jobStatusDescription'],
-                    $jobData['copies'],
-                    new \DateTimeImmutable($jobData['timeCreated']),
-                    $jobData['jobWidthMm'],
-                    $jobData['jobLengthMm'],
-                    $jobData['mediaWidthMm'],
-                    $jobData['mediaLengthMm'],
-                    $jobData['copiesPrinted'],
-                    $jobData['printSecElapsed'],
-                    $jobData['printSecRemaining'],
-                    isset($jobData['timePrinted']) && $jobData['timePrinted'] !== '1970-01-01T00:00:00Z'
-                        ? new \DateTimeImmutable($jobData['timePrinted'])
-                        : null,
-                    $jobData['copiesPrintedBefore'],
-                    $jobData['printEnv'],
-                    $jobData['owner'],
-                    $jobData['printerId'],
-                    $jobData['mediaType'],
-                    $jobData['ppVersion'],
-                    $jobData['customerInfo'],
-                    $jobData['preRippedInfo'],
-                    $jobData['journal']
-                );
+                $jobs[] = $this->jobMapper->mapFromArray($jobData);
             }
         }
 

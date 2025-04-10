@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use DjThossi\ErgosoftSdk\Factory\ErgosoftFactory;
+use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Factory initialisieren
 $factory = new ErgosoftFactory('http://192.168.1.2:50017');
