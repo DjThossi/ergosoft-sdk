@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Exception;
 
-class MissingRequiredFieldsException extends \InvalidArgumentException
+use InvalidArgumentException;
+
+class MissingRequiredFieldsException extends InvalidArgumentException
 {
     /**
      * @param string[] $missingFields

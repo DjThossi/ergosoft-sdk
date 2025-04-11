@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Exception;
 
-class InvalidJobGuidException extends \InvalidArgumentException
+use InvalidArgumentException;
+
+class InvalidJobGuidException extends InvalidArgumentException
 {
     public function __construct(string $guid)
     {

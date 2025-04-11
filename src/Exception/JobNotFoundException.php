@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Exception;
 
-class JobNotFoundException extends \RuntimeException
+use RuntimeException;
+
+class JobNotFoundException extends RuntimeException
 {
     public function __construct(string $jobGuid)
     {

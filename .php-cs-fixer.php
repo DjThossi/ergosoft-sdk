@@ -34,6 +34,8 @@ return $config
         'phpdoc_order' => true,
         'concat_space' => ['spacing' => 'one'],
         'declare_strict_types' => true,
+        'fully_qualified_strict_types' => false,
+        'global_namespace_import' => true,
         'yoda_style' => [
             'equal' => false,
             'identical' => false,

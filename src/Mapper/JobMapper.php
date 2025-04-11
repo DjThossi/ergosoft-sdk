@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Mapper;
 
+use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Exception\MissingRequiredFieldsException;
@@ -44,7 +45,7 @@ readonly class JobMapper
 
         $timePrinted = null;
         if (isset($data[self::FIELD_TIME_PRINTED]) && $data[self::FIELD_TIME_PRINTED] !== '1970-01-01T00:00:00Z') {
-            $timePrinted = new \DateTimeImmutable($data[self::FIELD_TIME_PRINTED]);
+            $timePrinted = new DateTimeImmutable($data[self::FIELD_TIME_PRINTED]);
         }
 
         return new Job(
@@ -54,7 +55,7 @@ readonly class JobMapper
             $data[self::FIELD_JOB_STATUS],
             $data[self::FIELD_JOB_STATUS_DESCRIPTION],
             $data[self::FIELD_COPIES],
-            new \DateTimeImmutable($data[self::FIELD_TIME_CREATED]),
+            new DateTimeImmutable($data[self::FIELD_TIME_CREATED]),
             $data[self::FIELD_JOB_WIDTH_MM],
             $data[self::FIELD_JOB_LENGTH_MM],
             $data[self::FIELD_MEDIA_WIDTH_MM],

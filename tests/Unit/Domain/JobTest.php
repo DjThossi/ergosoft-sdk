@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Domain;
 
+use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +21,7 @@ class JobTest extends TestCase
             'RUNNING',
             'Job is running',
             1,
-            new \DateTimeImmutable('2023-01-01T12:00:00Z'),
+            new DateTimeImmutable('2023-01-01T12:00:00Z'),
             100,
             200,
             100,
@@ -28,7 +29,7 @@ class JobTest extends TestCase
             1,
             10,
             20,
-            new \DateTimeImmutable('2023-01-01T12:30:00Z'),
+            new DateTimeImmutable('2023-01-01T12:30:00Z'),
             0,
             'PRINT_ENV',
             'admin',
@@ -75,7 +76,7 @@ class JobTest extends TestCase
             'RUNNING',
             'Job is running',
             1,
-            new \DateTimeImmutable('2023-01-01T12:00:00Z'),
+            new DateTimeImmutable('2023-01-01T12:00:00Z'),
             100,
             200,
             100,

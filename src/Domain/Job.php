@@ -4,33 +4,35 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Domain;
 
-class Job
+use DateTimeImmutable;
+
+readonly class Job
 {
     public function __construct(
-        private readonly JobGuid $jobGuid,
-        private readonly string $jobId,
-        private readonly string $jobName,
-        private readonly string $jobStatus,
-        private readonly string $jobStatusDescription,
-        private readonly int $copies,
-        private readonly \DateTimeImmutable $timeCreated,
-        private readonly int $jobWidthMm,
-        private readonly int $jobLengthMm,
-        private readonly int $mediaWidthMm,
-        private readonly int $mediaLengthMm,
-        private readonly int $copiesPrinted,
-        private readonly int $printSecElapsed,
-        private readonly int $printSecRemaining,
-        private readonly ?\DateTimeImmutable $timePrinted,
-        private readonly int $copiesPrintedBefore,
-        private readonly string $printEnv,
-        private readonly string $owner,
-        private readonly string $printerId,
-        private readonly string $mediaType,
-        private readonly string $ppVersion,
-        private readonly string $customerInfo,
-        private readonly string $preRippedInfo,
-        private readonly string $journal,
+        private JobGuid $jobGuid,
+        private string $jobId,
+        private string $jobName,
+        private string $jobStatus,
+        private string $jobStatusDescription,
+        private int $copies,
+        private DateTimeImmutable $timeCreated,
+        private int $jobWidthMm,
+        private int $jobLengthMm,
+        private int $mediaWidthMm,
+        private int $mediaLengthMm,
+        private int $copiesPrinted,
+        private int $printSecElapsed,
+        private int $printSecRemaining,
+        private ?DateTimeImmutable $timePrinted,
+        private int $copiesPrintedBefore,
+        private string $printEnv,
+        private string $owner,
+        private string $printerId,
+        private string $mediaType,
+        private string $ppVersion,
+        private string $customerInfo,
+        private string $preRippedInfo,
+        private string $journal,
     ) {
     }
 
@@ -64,7 +66,7 @@ class Job
         return $this->copies;
     }
 
-    public function getTimeCreated(): \DateTimeImmutable
+    public function getTimeCreated(): DateTimeImmutable
     {
         return $this->timeCreated;
     }
@@ -104,7 +106,7 @@ class Job
         return $this->printSecRemaining;
     }
 
-    public function getTimePrinted(): ?\DateTimeImmutable
+    public function getTimePrinted(): ?DateTimeImmutable
     {
         return $this->timePrinted;
     }
