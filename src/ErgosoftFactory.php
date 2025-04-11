@@ -6,6 +6,7 @@ namespace DjThossi\ErgosoftSdk;
 
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
+use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 
@@ -19,7 +20,7 @@ readonly class ErgosoftFactory
     public function getJobsApi(): GetJobsApi
     {
         return new GetJobsApi(
-            new Client($this->baseUrl),
+            $this->createClient(),
             $this->createJobMapper()
         );
     }
@@ -27,13 +28,25 @@ readonly class ErgosoftFactory
     public function getJobByGuidApi(): GetJobByGuidApi
     {
         return new GetJobByGuidApi(
-            new Client($this->baseUrl),
+            $this->createClient(),
             $this->createJobMapper()
+        );
+    }
+
+    public function getSubmitDeltaXmlFileApi(): SubmitDeltaXmlFileApi
+    {
+        return new SubmitDeltaXmlFileApi(
+            $this->createClient()
         );
     }
 
     private function createJobMapper(): JobMapper
     {
         return new JobMapper();
+    }
+
+    private function createClient(): Client
+    {
+        return new Client($this->baseUrl);
     }
 }
