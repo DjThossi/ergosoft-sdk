@@ -9,13 +9,13 @@ use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client with YOUR URL
 $factory = new ErgosoftFactory('https://YOUR_API_URL');
-$submitApi = $factory->createSubmitDeltaXmlFileApi();
+$api = $factory->createSubmitDeltaXmlFileApi();
 
 $xmlContent = '<HotFile><Job Name="Example"><Image FileName="E:\arrow.png"></Image></Job></HotFile>';
 $hotFile = new HotFile($xmlContent);
 
 try {
-    $jobGuid = $submitApi->submitDeltaXmlFile($hotFile);
+    $jobGuid = $api->submitDeltaXmlFile($hotFile);
     echo 'Submitted Job GUID: ' . $jobGuid->value . "\n";
 } catch (Exception $e) {
     echo 'Error: ' . $e->getMessage() . "\n";

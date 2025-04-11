@@ -12,10 +12,10 @@ $factory = new ErgosoftFactory('https://YOUR_API_URL');
 // Replace this with a valid job GUID
 $jobGuid = new JobGuid('YOUR_JOB_GUID');
 
-$jobApi = $factory->createGetJobByGuidApi();
+$api = $factory->createGetJobByGuidApi();
 
 try {
-    $job = $jobApi->getJobByGuid($jobGuid);
+    $job = $api->getJobByGuid($jobGuid);
 
     // Display job details
     echo "Job Details:\n";

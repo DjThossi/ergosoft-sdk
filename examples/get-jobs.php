@@ -8,10 +8,10 @@ use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client with YOUR URL
 $factory = new ErgosoftFactory('https://YOUR_API_URL');
-$jobApi = $factory->createGetJobsApi();
+$api = $factory->createGetJobsApi();
 
 try {
-    $jobs = $jobApi->getJobs();
+    $jobs = $api->getJobs();
     foreach ($jobs as $job) {
         echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
         echo 'Job ID: ' . $job->getJobId()->value . "\n";
