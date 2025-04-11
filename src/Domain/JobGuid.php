@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Domain;
 
-use DjThossi\ErgosoftSdk\Exception\InvalidGuidException;
+use DjThossi\ErgosoftSdk\Exception\InvalidJobGuidException;
 
-readonly class Guid
+readonly class JobGuid
 {
     public function __construct(
         public string $value,
@@ -22,7 +22,7 @@ readonly class Guid
     private function ensure(): void
     {
         if (!$this->isValid($this->value)) {
-            throw new InvalidGuidException($this->value);
+            throw new InvalidJobGuidException($this->value);
         }
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Mapper;
 
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Exception\MissingRequiredFieldsException;
 
 readonly class JobMapper
@@ -36,8 +37,6 @@ readonly class JobMapper
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @throws MissingRequiredFieldsException
      */
     public function mapFromArray(array $data): Job
     {
@@ -49,7 +48,7 @@ readonly class JobMapper
         }
 
         return new Job(
-            $data[self::FIELD_JOB_GUID],
+            new JobGuid($data[self::FIELD_JOB_GUID]),
             (string) $data[self::FIELD_JOB_ID],
             $data[self::FIELD_JOB_NAME],
             $data[self::FIELD_JOB_STATUS],

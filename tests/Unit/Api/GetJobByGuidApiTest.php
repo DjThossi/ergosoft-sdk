@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
-use DjThossi\ErgosoftSdk\Domain\Guid;
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
@@ -28,7 +28,7 @@ class GetJobByGuidApiTest extends TestCase
 
     public function testGetJobByGuid(): void
     {
-        $jobGuid = new Guid('12345678-1234-1234-1234-123456789012');
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
         $responseJsonData = [
             JobMapper::FIELD_JOB_GUID => $jobGuid->value,
             JobMapper::FIELD_JOB_ID => '12345',
@@ -76,7 +76,7 @@ class GetJobByGuidApiTest extends TestCase
 
     public function testGetJobByGuidNotFound(): void
     {
-        $jobGuid = new Guid('12345678-1234-1234-1234-123456789012');
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
         $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())

@@ -7,7 +7,7 @@ namespace DjThossi\ErgosoftSdk\Domain;
 class Job
 {
     public function __construct(
-        private readonly string $jobGuid,
+        private readonly JobGuid $jobGuid,
         private readonly string $jobId,
         private readonly string $jobName,
         private readonly string $jobStatus,
@@ -34,7 +34,7 @@ class Job
     ) {
     }
 
-    public function getJobGuid(): string
+    public function getJobGuid(): JobGuid
     {
         return $this->jobGuid;
     }

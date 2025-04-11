@@ -14,7 +14,7 @@ try {
     $jobs = $jobApi->getJobs();
     foreach ($jobs as $job) {
         echo 'Job ID: ' . $job->getJobId() . "\n";
-        echo 'Job GUID: ' . $job->getJobGuid() . "\n";
+        echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
         echo 'Name: ' . $job->getJobName() . "\n";
         echo 'Status: ' . $job->getJobStatus() . ' (' . $job->getJobStatusDescription() . ")\n";
         echo 'Copies: ' . $job->getCopies() . "\n";

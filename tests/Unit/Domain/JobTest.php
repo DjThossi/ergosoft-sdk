@@ -5,14 +5,16 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Domain;
 
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use PHPUnit\Framework\TestCase;
 
 class JobTest extends TestCase
 {
     public function testJobGetters(): void
     {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
         $job = new Job(
-            'job-guid',
+            $jobGuid,
             '12345',
             'Test Job',
             'RUNNING',
@@ -38,7 +40,7 @@ class JobTest extends TestCase
             'Journal'
         );
 
-        $this->assertEquals('job-guid', $job->getJobGuid());
+        $this->assertSame($jobGuid, $job->getJobGuid());
         $this->assertEquals('12345', $job->getJobId());
         $this->assertEquals('Test Job', $job->getJobName());
         $this->assertEquals('RUNNING', $job->getJobStatus());
@@ -67,7 +69,7 @@ class JobTest extends TestCase
     public function testJobWithNullTimePrinted(): void
     {
         $job = new Job(
-            'job-guid',
+            new JobGuid('12345678-1234-1234-1234-123456789012'),
             '12345',
             'Test Job',
             'RUNNING',
