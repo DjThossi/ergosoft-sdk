@@ -9,6 +9,8 @@ use DjThossi\ErgosoftSdk\Exception\InvalidJobGuidException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+use function sprintf;
+
 class JobGuidTest extends TestCase
 {
     public function testValidGuid(): void
@@ -21,7 +23,7 @@ class JobGuidTest extends TestCase
     public function testInvalidGuid(string $invalidGuid): void
     {
         $this->expectException(InvalidJobGuidException::class);
-        $this->expectExceptionMessage(\sprintf('"%s" is not a valid GUID', $invalidGuid));
+        $this->expectExceptionMessage(sprintf('"%s" is not a valid GUID', $invalidGuid));
 
         new JobGuid($invalidGuid);
     }

@@ -9,12 +9,23 @@ use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use GuzzleHttp\Psr7\Response;
+
+use const JSON_THROW_ON_ERROR;
+
 use PHPUnit\Framework\TestCase;
 
 class GetJobsApiTest extends TestCase
 {
+    /**
+     * @var Client&\PHPUnit\Framework\MockObject\MockObject
+     */
     private Client $client;
+
+    /**
+     * @var JobMapper&\PHPUnit\Framework\MockObject\MockObject
+     */
     private JobMapper $jobMapper;
+
     private GetJobsApi $api;
 
     protected function setUp(): void
@@ -79,7 +90,7 @@ class GetJobsApiTest extends TestCase
                 JobMapper::FIELD_PRE_RIPPED_INFO => 'Pre-Ripped Info',
                 JobMapper::FIELD_JOURNAL => 'Journal',
             ],
-        ], \JSON_THROW_ON_ERROR));
+        ], JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -111,7 +122,7 @@ class GetJobsApiTest extends TestCase
 
     public function testGetJobsEmpty(): void
     {
-        $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode([], JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')

@@ -6,6 +6,8 @@ namespace DjThossi\ErgosoftSdk\Exception;
 
 use InvalidArgumentException;
 
+use function sprintf;
+
 class MissingRequiredFieldsException extends InvalidArgumentException
 {
     /**
@@ -13,7 +15,7 @@ class MissingRequiredFieldsException extends InvalidArgumentException
      */
     public function __construct(array $missingFields)
     {
-        parent::__construct(\sprintf(
+        parent::__construct(sprintf(
             'Missing required fields: %s',
             implode(', ', $missingFields)
         ));

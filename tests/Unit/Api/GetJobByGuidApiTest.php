@@ -11,11 +11,24 @@ use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use GuzzleHttp\Psr7\Response;
+
+use const JSON_THROW_ON_ERROR;
+
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+
+use function sprintf;
 
 class GetJobByGuidApiTest extends TestCase
 {
+    /**
+     * @var Client&MockObject
+     */
     private Client $client;
+
+    /**
+     * @var JobMapper&MockObject
+     */
     private JobMapper $jobMapper;
     private GetJobByGuidApi $api;
 
@@ -55,7 +68,7 @@ class GetJobByGuidApiTest extends TestCase
             JobMapper::FIELD_PRE_RIPPED_INFO => 'Pre-Ripped Info',
             JobMapper::FIELD_JOURNAL => 'Journal',
         ];
-        $expectedResponse = new Response(200, [], json_encode($responseJsonData, \JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode($responseJsonData, JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -77,7 +90,7 @@ class GetJobByGuidApiTest extends TestCase
     public function testGetJobByGuidNotFound(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
-        $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
+        $expectedResponse = new Response(200, [], json_encode([], JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
@@ -88,7 +101,7 @@ class GetJobByGuidApiTest extends TestCase
             ->method('mapFromArray');
 
         $this->expectException(JobNotFoundException::class);
-        $this->expectExceptionMessage(\sprintf('Job with GUID "%s" not found', $jobGuid->value));
+        $this->expectExceptionMessage(sprintf('Job with GUID "%s" not found', $jobGuid->value));
 
         $this->api->getJobByGuid($jobGuid);
     }

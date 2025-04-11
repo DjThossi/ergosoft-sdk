@@ -35,7 +35,11 @@ return $config
         'concat_space' => ['spacing' => 'one'],
         'declare_strict_types' => true,
         'fully_qualified_strict_types' => false,
-        'global_namespace_import' => true,
+        'global_namespace_import' => [
+            'import_classes' => true,
+            'import_constants' => true,
+            'import_functions' => true,
+        ],
         'yoda_style' => [
             'equal' => false,
             'identical' => false,
