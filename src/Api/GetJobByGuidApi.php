@@ -9,7 +9,6 @@ use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
-use GuzzleHttp\Exception\GuzzleException;
 
 readonly class GetJobByGuidApi
 {
@@ -19,17 +18,6 @@ readonly class GetJobByGuidApi
     ) {
     }
 
-    /**
-     * Retrieves a job by its GUID.
-     *
-     * @param JobGuid $jobGuid The GUID of the job to retrieve
-     *
-     * @throws GuzzleException When the API request fails
-     * @throws JobNotFoundException When the job is not found
-     * @throws \JsonException When the response is not valid
-     *
-     * @return Job The job object
-     */
     public function getJobByGuid(JobGuid $jobGuid): Job
     {
         $response = $this->client->get('/Trickle/get-job-by-guid/' . $jobGuid->value);

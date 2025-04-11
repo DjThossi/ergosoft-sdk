@@ -77,8 +77,6 @@ readonly class JobMapper
 
     /**
      * @param array<string, mixed> $data
-     *
-     * @throws MissingRequiredFieldsException
      */
     private function ensureRequiredFields(array $data): void
     {

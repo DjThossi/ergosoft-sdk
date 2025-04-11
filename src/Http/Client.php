@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Http;
 
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 class Client
@@ -24,17 +23,11 @@ class Client
         ]);
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function get(string $endpoint): ResponseInterface
     {
         return $this->client->get($this->baseUrl . '/' . ltrim($endpoint, '/'));
     }
 
-    /**
-     * @throws GuzzleException
-     */
     public function post(string $endpoint, string $body): ResponseInterface
     {
         return $this->client->post($this->baseUrl . '/' . ltrim($endpoint, '/'), [

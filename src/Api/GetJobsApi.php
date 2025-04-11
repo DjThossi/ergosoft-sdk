@@ -7,7 +7,6 @@ namespace DjThossi\ErgosoftSdk\Api;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
-use GuzzleHttp\Exception\GuzzleException;
 
 readonly class GetJobsApi
 {
@@ -20,8 +19,6 @@ readonly class GetJobsApi
     }
 
     /**
-     * @throws GuzzleException|\JsonException
-     *
      * @return Job[]
      */
     public function getJobs(): array
