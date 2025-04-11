@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use DjThossi\ErgosoftSdk\Domain\Guid;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client
@@ -13,7 +14,7 @@ $jobApi = $factory->getJobByGuidApi();
 try {
     // Replace this with a valid job GUID
     $jobGuid = 'YOUR_JOB_GUID';
-    $job = $jobApi->getJobByGuid($jobGuid);
+    $job = $jobApi->getJobByGuid(new Guid($jobGuid));
 
     // Display job details
     echo "Job Details:\n";

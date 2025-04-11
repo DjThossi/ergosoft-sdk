@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
+use DjThossi\ErgosoftSdk\Domain\Guid;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
@@ -27,9 +28,9 @@ class GetJobByGuidApiTest extends TestCase
 
     public function testGetJobByGuid(): void
     {
-        $jobGuid = 'test-job-guid';
+        $jobGuid = new Guid('12345678-1234-1234-1234-123456789012');
         $responseJsonData = [
-            JobMapper::FIELD_JOB_GUID => $jobGuid,
+            JobMapper::FIELD_JOB_GUID => $jobGuid->value,
             JobMapper::FIELD_JOB_ID => '12345',
             JobMapper::FIELD_JOB_NAME => 'Test Job',
             JobMapper::FIELD_JOB_STATUS => 'RUNNING',
@@ -58,14 +59,14 @@ class GetJobByGuidApiTest extends TestCase
 
         $this->client->expects($this->once())
             ->method('get')
-            ->with('/Trickle/get-job-by-guid/' . $jobGuid)
+            ->with('/Trickle/get-job-by-guid/' . $jobGuid->value)
             ->willReturn($expectedResponse);
 
         $job = $this->createMock(Job::class);
 
         $this->jobMapper->expects($this->once())
             ->method('mapFromArray')
-            ->with($this->callback(fn ($data) => $data[JobMapper::FIELD_JOB_GUID] === $jobGuid))
+            ->with($this->callback(fn ($data) => $data[JobMapper::FIELD_JOB_GUID] === $jobGuid->value))
             ->willReturn($job);
 
         $result = $this->api->getJobByGuid($jobGuid);
@@ -75,19 +76,19 @@ class GetJobByGuidApiTest extends TestCase
 
     public function testGetJobByGuidNotFound(): void
     {
-        $jobGuid = 'non-existent-guid';
+        $jobGuid = new Guid('12345678-1234-1234-1234-123456789012');
         $expectedResponse = new Response(200, [], json_encode([], \JSON_THROW_ON_ERROR));
 
         $this->client->expects($this->once())
             ->method('get')
-            ->with('/Trickle/get-job-by-guid/' . $jobGuid)
+            ->with('/Trickle/get-job-by-guid/' . $jobGuid->value)
             ->willReturn($expectedResponse);
 
         $this->jobMapper->expects($this->never())
             ->method('mapFromArray');
 
         $this->expectException(JobNotFoundException::class);
-        $this->expectExceptionMessage(\sprintf('Job with GUID "%s" not found', $jobGuid));
+        $this->expectExceptionMessage(\sprintf('Job with GUID "%s" not found', $jobGuid->value));
 
         $this->api->getJobByGuid($jobGuid);
     }

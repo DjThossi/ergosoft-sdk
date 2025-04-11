@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Api;
 
+use DjThossi\ErgosoftSdk\Domain\Guid;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
@@ -21,7 +22,7 @@ readonly class GetJobByGuidApi
     /**
      * Retrieves a job by its GUID.
      *
-     * @param string $jobGuid The GUID of the job to retrieve
+     * @param Guid $jobGuid The GUID of the job to retrieve
      *
      * @throws GuzzleException When the API request fails
      * @throws JobNotFoundException When the job is not found
@@ -29,13 +30,13 @@ readonly class GetJobByGuidApi
      *
      * @return Job The job object
      */
-    public function getJobByGuid(string $jobGuid): Job
+    public function getJobByGuid(Guid $jobGuid): Job
     {
-        $response = $this->client->get('/Trickle/get-job-by-guid/' . $jobGuid);
+        $response = $this->client->get('/Trickle/get-job-by-guid/' . $jobGuid->value);
         $data = json_decode((string) $response->getBody(), true, 512, \JSON_THROW_ON_ERROR);
 
         if (empty($data)) {
-            throw new JobNotFoundException($jobGuid);
+            throw new JobNotFoundException($jobGuid->value);
         }
 
         return $this->jobMapper->mapFromArray($data);
