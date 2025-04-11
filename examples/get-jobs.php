@@ -6,11 +6,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
-// Factory initialisieren
+// Initialize the Ergosoft API client with YOUR URL
 $factory = new ErgosoftFactory('https://YOUR_API_URL');
 $jobApi = $factory->getJobsApi();
 
-// Jobs abrufen
 try {
     $jobs = $jobApi->getJobs();
     foreach ($jobs as $job) {
