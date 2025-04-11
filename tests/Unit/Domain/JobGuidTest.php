@@ -9,7 +9,7 @@ use DjThossi\ErgosoftSdk\Exception\InvalidJobGuidException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-class GuidTest extends TestCase
+class JobGuidTest extends TestCase
 {
     public function testValidGuid(): void
     {

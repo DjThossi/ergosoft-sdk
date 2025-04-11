@@ -13,9 +13,9 @@ $jobApi = $factory->getJobsApi();
 try {
     $jobs = $jobApi->getJobs();
     foreach ($jobs as $job) {
-        echo 'Job ID: ' . $job->getJobId()->value . "\n";
         echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
-        echo 'Name: ' . $job->getJobName() . "\n";
+        echo 'Job ID: ' . $job->getJobId()->value . "\n";
+        echo 'Name: ' . $job->getJobName()->value . "\n";
         echo 'Status: ' . $job->getJobStatus() . ' (' . $job->getJobStatusDescription() . ")\n";
         echo 'Copies: ' . $job->getCopies() . "\n";
         echo 'Created at: ' . $job->getTimeCreated()->format('Y-m-d H:i:s') . "\n";
