@@ -8,7 +8,7 @@ use DjThossi\ErgosoftSdk\Domain\HotFile;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client with YOUR URL
-$factory = new ErgosoftFactory('http://192.168.1.2:50017');
+$factory = new ErgosoftFactory('https://YOUR_API_URL');
 $submitApi = $factory->getSubmitDeltaXmlFileApi();
 
 $xmlContent = '<HotFile><Job Name="Example"><Image FileName="E:\arrow.png"></Image></Job></HotFile>';
