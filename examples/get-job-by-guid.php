@@ -19,7 +19,7 @@ try {
 
     // Display job details
     echo "Job Details:\n";
-    echo 'Job ID: ' . $job->getJobId() . "\n";
+    echo 'Job ID: ' . $job->getJobId()->value . "\n";
     echo 'Name: ' . $job->getJobName() . "\n";
     echo 'Status: ' . $job->getJobStatus() . "\n";
     echo 'Status Description: ' . $job->getJobStatusDescription() . "\n";

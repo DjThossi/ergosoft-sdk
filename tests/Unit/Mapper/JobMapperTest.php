@@ -6,6 +6,7 @@ namespace DjThossi\ErgosoftSdk\Tests\Unit\Mapper;
 
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\JobId;
 use DjThossi\ErgosoftSdk\Exception\MissingRequiredFieldsException;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use PHPUnit\Framework\TestCase;
@@ -22,9 +23,10 @@ class JobMapperTest extends TestCase
     public function testMapFromArray(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $jobId = new JobId(12345);
         $data = [
             JobMapper::FIELD_JOB_GUID => $jobGuid->value,
-            JobMapper::FIELD_JOB_ID => '12345',
+            JobMapper::FIELD_JOB_ID => $jobId->value,
             JobMapper::FIELD_JOB_NAME => 'Test Job 1',
             JobMapper::FIELD_JOB_STATUS => 'RUNNING',
             JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is running',
@@ -54,7 +56,7 @@ class JobMapperTest extends TestCase
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(Job::class, $job);
         $this->assertEquals($jobGuid, $job->getJobGuid());
-        $this->assertSame('12345', $job->getJobId());
+        $this->assertEquals($jobId, $job->getJobId());
         $this->assertSame('Test Job 1', $job->getJobName());
         $this->assertSame('RUNNING', $job->getJobStatus());
         $this->assertSame('Job is running', $job->getJobStatusDescription());
@@ -82,9 +84,11 @@ class JobMapperTest extends TestCase
     public function testMapFromArrayWithTimePrinted1970(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $jobId = new JobId(12346);
+
         $data = [
             JobMapper::FIELD_JOB_GUID => $jobGuid->value,
-            JobMapper::FIELD_JOB_ID => '12346',
+            JobMapper::FIELD_JOB_ID => $jobId->value,
             JobMapper::FIELD_JOB_NAME => 'Test Job 2',
             JobMapper::FIELD_JOB_STATUS => 'RUNNING',
             JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is running',
@@ -114,7 +118,7 @@ class JobMapperTest extends TestCase
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(Job::class, $job);
         $this->assertEquals($jobGuid, $job->getJobGuid());
-        $this->assertSame('12346', $job->getJobId());
+        $this->assertEquals($jobId, $job->getJobId());
         $this->assertSame('Test Job 2', $job->getJobName());
         $this->assertSame('RUNNING', $job->getJobStatus());
         $this->assertSame('Job is running', $job->getJobStatusDescription());
@@ -142,9 +146,10 @@ class JobMapperTest extends TestCase
     public function testMapFromArrayWithTimePrintedNull(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $jobId = new JobId(12347);
         $data = [
             JobMapper::FIELD_JOB_GUID => $jobGuid->value,
-            JobMapper::FIELD_JOB_ID => '12347',
+            JobMapper::FIELD_JOB_ID => $jobId->value,
             JobMapper::FIELD_JOB_NAME => 'Test Job 3',
             JobMapper::FIELD_JOB_STATUS => 'RUNNING',
             JobMapper::FIELD_JOB_STATUS_DESCRIPTION => 'Job is running',
@@ -174,7 +179,7 @@ class JobMapperTest extends TestCase
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(Job::class, $job);
         $this->assertEquals($jobGuid, $job->getJobGuid());
-        $this->assertSame('12347', $job->getJobId());
+        $this->assertEquals($jobId, $job->getJobId());
         $this->assertSame('Test Job 3', $job->getJobName());
         $this->assertSame('RUNNING', $job->getJobStatus());
         $this->assertSame('Job is running', $job->getJobStatusDescription());

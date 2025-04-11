@@ -7,6 +7,7 @@ namespace DjThossi\ErgosoftSdk\Tests\Unit\Domain;
 use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\JobId;
 use PHPUnit\Framework\TestCase;
 
 class JobTest extends TestCase
@@ -14,9 +15,10 @@ class JobTest extends TestCase
     public function testJobGetters(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $jobId = new JobId(12345);
         $job = new Job(
             $jobGuid,
-            '12345',
+            $jobId,
             'Test Job',
             'RUNNING',
             'Job is running',
@@ -42,7 +44,7 @@ class JobTest extends TestCase
         );
 
         $this->assertSame($jobGuid, $job->getJobGuid());
-        $this->assertEquals('12345', $job->getJobId());
+        $this->assertSame($jobId, $job->getJobId());
         $this->assertEquals('Test Job', $job->getJobName());
         $this->assertEquals('RUNNING', $job->getJobStatus());
         $this->assertEquals('Job is running', $job->getJobStatusDescription());
@@ -71,7 +73,7 @@ class JobTest extends TestCase
     {
         $job = new Job(
             new JobGuid('12345678-1234-1234-1234-123456789012'),
-            '12345',
+            new JobId(12345),
             'Test Job',
             'RUNNING',
             'Job is running',

@@ -10,7 +10,7 @@ readonly class Job
 {
     public function __construct(
         private JobGuid $jobGuid,
-        private string $jobId,
+        private JobId $jobId,
         private string $jobName,
         private string $jobStatus,
         private string $jobStatusDescription,
@@ -41,7 +41,7 @@ readonly class Job
         return $this->jobGuid;
     }
 
-    public function getJobId(): string
+    public function getJobId(): JobId
     {
         return $this->jobId;
     }

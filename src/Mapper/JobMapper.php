@@ -7,6 +7,7 @@ namespace DjThossi\ErgosoftSdk\Mapper;
 use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\JobId;
 use DjThossi\ErgosoftSdk\Exception\MissingRequiredFieldsException;
 
 readonly class JobMapper
@@ -50,7 +51,7 @@ readonly class JobMapper
 
         return new Job(
             new JobGuid($data[self::FIELD_JOB_GUID]),
-            (string) $data[self::FIELD_JOB_ID],
+            new JobId($data[self::FIELD_JOB_ID]),
             $data[self::FIELD_JOB_NAME],
             $data[self::FIELD_JOB_STATUS],
             $data[self::FIELD_JOB_STATUS_DESCRIPTION],
