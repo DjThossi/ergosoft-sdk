@@ -17,7 +17,7 @@ readonly class ErgosoftFactory
     ) {
     }
 
-    public function getJobsApi(): GetJobsApi
+    public function createGetJobsApi(): GetJobsApi
     {
         return new GetJobsApi(
             $this->createClient(),
@@ -25,7 +25,7 @@ readonly class ErgosoftFactory
         );
     }
 
-    public function getJobByGuidApi(): GetJobByGuidApi
+    public function createGetJobByGuidApi(): GetJobByGuidApi
     {
         return new GetJobByGuidApi(
             $this->createClient(),
@@ -33,7 +33,7 @@ readonly class ErgosoftFactory
         );
     }
 
-    public function getSubmitDeltaXmlFileApi(): SubmitDeltaXmlFileApi
+    public function createSubmitDeltaXmlFileApi(): SubmitDeltaXmlFileApi
     {
         return new SubmitDeltaXmlFileApi(
             $this->createClient()

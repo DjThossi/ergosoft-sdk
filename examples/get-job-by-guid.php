@@ -12,7 +12,7 @@ $factory = new ErgosoftFactory('https://YOUR_API_URL');
 // Replace this with a valid job GUID
 $jobGuid = new JobGuid('YOUR_JOB_GUID');
 
-$jobApi = $factory->getJobByGuidApi();
+$jobApi = $factory->createGetJobByGuidApi();
 
 try {
     $job = $jobApi->getJobByGuid($jobGuid);

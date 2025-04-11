@@ -8,7 +8,7 @@ use DjThossi\ErgosoftSdk\ErgosoftFactory;
 
 // Initialize the Ergosoft API client with YOUR URL
 $factory = new ErgosoftFactory('https://YOUR_API_URL');
-$jobApi = $factory->getJobsApi();
+$jobApi = $factory->createGetJobsApi();
 
 try {
     $jobs = $jobApi->getJobs();
