@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Http;
 
 use DjThossi\ErgosoftSdk\Http\Client;
+use DjThossi\ErgosoftSdk\Domain\BaseUrl;
+use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -22,7 +24,7 @@ class ClientTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $guzzleClient = new GuzzleClient(['handler' => $handlerStack]);
 
-        $client = new Client('https://api.ergosoft.de');
+        $client = new Client(new BaseUrl('https://api.ergosoft.de'), new RequestTimeout(5));
         $reflection = new ReflectionClass($client);
         $property = $reflection->getProperty('client');
         $property->setValue($client, $guzzleClient);
@@ -40,7 +42,7 @@ class ClientTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $guzzleClient = new GuzzleClient(['handler' => $handlerStack]);
 
-        $client = new Client('https://api.ergosoft.de');
+        $client = new Client(new BaseUrl('https://api.ergosoft.de'), new RequestTimeout(10));
         $reflection = new ReflectionClass($client);
         $property = $reflection->getProperty('client');
         $property->setValue($client, $guzzleClient);

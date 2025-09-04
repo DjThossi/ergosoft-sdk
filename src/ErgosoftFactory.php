@@ -13,7 +13,7 @@ use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 readonly class ErgosoftFactory
 {
     public function __construct(
-        private string $baseUrl,
+        private Configuration $configuration,
     ) {
     }
 
@@ -47,6 +47,9 @@ readonly class ErgosoftFactory
 
     private function createClient(): Client
     {
-        return new Client($this->baseUrl);
+        return new Client(
+            $this->configuration->getBaseUrl(),
+            $this->configuration->getRequestTimeout()
+        );
     }
 }
