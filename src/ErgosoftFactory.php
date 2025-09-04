@@ -13,7 +13,7 @@ use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 readonly class ErgosoftFactory
 {
     public function __construct(
-        private Configuration $configuration,
+        private ErgosoftConfiguration $configuration,
     ) {
     }
 

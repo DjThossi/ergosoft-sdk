@@ -21,12 +21,12 @@ composer require djthossi/ergosoft-sdk
 
 ```php
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
-use DjThossi\ErgosoftSdk\SimpleConfiguration;
+use DjThossi\ErgosoftSdk\SimpleErgosoftConfiguration;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
-use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
 
 // Initialize the Ergosoft API client with YOUR URL and optional timeout (defaults to 10s)
-$factory = new ErgosoftFactory(new SimpleConfiguration(new BaseUrl('https://YOUR_API_URL')));
+$configuration = new SimpleErgosoftConfiguration(new BaseUrl('https://YOUR_API_URL'));
+$factory = new ErgosoftFactory($configuration);
 $jobApi = $factory->createGetJobsApi();
 
 try {

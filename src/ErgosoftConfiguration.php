@@ -7,7 +7,7 @@ namespace DjThossi\ErgosoftSdk;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
 
-interface Configuration
+interface ErgosoftConfiguration
 {
     public function getBaseUrl(): BaseUrl;
 

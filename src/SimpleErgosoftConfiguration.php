@@ -7,7 +7,7 @@ namespace DjThossi\ErgosoftSdk;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
 
-final readonly class SimpleConfiguration implements Configuration
+final readonly class SimpleErgosoftConfiguration implements ErgosoftConfiguration
 {
     private BaseUrl $baseUrl;
     private RequestTimeout $requestTimeout;
