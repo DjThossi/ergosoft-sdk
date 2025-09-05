@@ -33,15 +33,15 @@ class SimpleErgosoftConfigurationTest extends TestCase
         $timeout = $config->getRequestTimeout();
 
         $this->assertInstanceOf(RequestTimeout::class, $timeout);
-        $this->assertSame(10.0, $timeout->seconds);
+        $this->assertSame(10, $timeout->seconds);
     }
 
     public function testUsesProvidedRequestTimeout(): void
     {
-        $timeout = new RequestTimeout(3.5);
+        $timeout = new RequestTimeout(3);
         $config = new SimpleErgosoftConfiguration(new BaseUrl('https://api.ergosoft.example'), $timeout);
 
         $this->assertSame($timeout, $config->getRequestTimeout());
-        $this->assertSame(3.5, $config->getRequestTimeout()->seconds);
+        $this->assertSame(3, $config->getRequestTimeout()->seconds);
     }
 }

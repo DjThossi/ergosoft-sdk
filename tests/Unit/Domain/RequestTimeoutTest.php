@@ -12,21 +12,20 @@ final class RequestTimeoutTest extends TestCase
 {
     public function testValidTimeoutStoresSeconds(): void
     {
-        $timeout = new RequestTimeout(2.5);
-        $this->assertSame(2.5, $timeout->seconds);
+        $timeout = new RequestTimeout(2);
+        $this->assertSame(2, $timeout->seconds);
     }
 
-    public function testZeroThrowsException(): void
+    public function testZeroWorks(): void
     {
-        $this->expectException(InvalidRequestTimeoutException::class);
-        $this->expectExceptionMessage('RequestTimeout must be greater than 0 seconds');
-        new RequestTimeout(0.0);
+        $timeout = new RequestTimeout(0);
+        $this->assertSame(0, $timeout->seconds);
     }
 
     public function testNegativeThrowsException(): void
     {
         $this->expectException(InvalidRequestTimeoutException::class);
-        $this->expectExceptionMessage('RequestTimeout must be greater than 0 seconds');
+        $this->expectExceptionMessage('RequestTimeout must be greater than or equals 0 seconds');
         new RequestTimeout(-1);
     }
 }

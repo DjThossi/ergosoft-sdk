@@ -15,7 +15,7 @@ final readonly class SimpleErgosoftConfiguration implements ErgosoftConfiguratio
     public function __construct(BaseUrl $baseUrl, ?RequestTimeout $requestTimeout = null)
     {
         $this->baseUrl = $baseUrl;
-        $this->requestTimeout = $requestTimeout ?? new RequestTimeout(10.0);
+        $this->requestTimeout = $requestTimeout ?? new RequestTimeout(10);
     }
 
     public function getBaseUrl(): BaseUrl
