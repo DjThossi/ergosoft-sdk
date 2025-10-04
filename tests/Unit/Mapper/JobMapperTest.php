@@ -36,8 +36,8 @@ class JobMapperTest extends TestCase
             JobMapper::FIELD_TIME_CREATED => '2023-01-01T12:00:00Z',
             JobMapper::FIELD_JOB_WIDTH_MM => 100,
             JobMapper::FIELD_JOB_LENGTH_MM => 200,
-            JobMapper::FIELD_MEDIA_WIDTH_MM => 100,
-            JobMapper::FIELD_MEDIA_LENGTH_MM => 200,
+            JobMapper::FIELD_MEDIA_WIDTH_MM => 100.1,
+            JobMapper::FIELD_MEDIA_LENGTH_MM => 200.2,
             JobMapper::FIELD_COPIES_PRINTED => 1,
             JobMapper::FIELD_PRINT_SEC_ELAPSED => 10,
             JobMapper::FIELD_PRINT_SEC_REMAINING => 20,
@@ -66,8 +66,8 @@ class JobMapperTest extends TestCase
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
         $this->assertSame(100, $job->getJobWidthMm());
         $this->assertSame(200, $job->getJobLengthMm());
-        $this->assertSame(100, $job->getMediaWidthMm());
-        $this->assertSame(200, $job->getMediaLengthMm());
+        $this->assertSame(100.1, $job->getMediaWidthMm());
+        $this->assertSame(200.2, $job->getMediaLengthMm());
         $this->assertSame(1, $job->getCopiesPrinted());
         $this->assertSame(10, $job->getPrintSecElapsed());
         $this->assertSame(20, $job->getPrintSecRemaining());
@@ -99,8 +99,8 @@ class JobMapperTest extends TestCase
             JobMapper::FIELD_TIME_CREATED => '2023-01-01T12:00:00Z',
             JobMapper::FIELD_JOB_WIDTH_MM => 100,
             JobMapper::FIELD_JOB_LENGTH_MM => 200,
-            JobMapper::FIELD_MEDIA_WIDTH_MM => 100,
-            JobMapper::FIELD_MEDIA_LENGTH_MM => 200,
+            JobMapper::FIELD_MEDIA_WIDTH_MM => 100.2,
+            JobMapper::FIELD_MEDIA_LENGTH_MM => 200.3,
             JobMapper::FIELD_COPIES_PRINTED => 1,
             JobMapper::FIELD_PRINT_SEC_ELAPSED => 10,
             JobMapper::FIELD_PRINT_SEC_REMAINING => 20,
@@ -129,8 +129,8 @@ class JobMapperTest extends TestCase
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
         $this->assertSame(100, $job->getJobWidthMm());
         $this->assertSame(200, $job->getJobLengthMm());
-        $this->assertSame(100, $job->getMediaWidthMm());
-        $this->assertSame(200, $job->getMediaLengthMm());
+        $this->assertSame(100.2, $job->getMediaWidthMm());
+        $this->assertSame(200.3, $job->getMediaLengthMm());
         $this->assertSame(1, $job->getCopiesPrinted());
         $this->assertSame(10, $job->getPrintSecElapsed());
         $this->assertSame(20, $job->getPrintSecRemaining());
@@ -161,8 +161,8 @@ class JobMapperTest extends TestCase
             JobMapper::FIELD_TIME_CREATED => '2023-01-01T12:00:00Z',
             JobMapper::FIELD_JOB_WIDTH_MM => 100,
             JobMapper::FIELD_JOB_LENGTH_MM => 200,
-            JobMapper::FIELD_MEDIA_WIDTH_MM => 100,
-            JobMapper::FIELD_MEDIA_LENGTH_MM => 200,
+            JobMapper::FIELD_MEDIA_WIDTH_MM => 100.4,
+            JobMapper::FIELD_MEDIA_LENGTH_MM => 200.5,
             JobMapper::FIELD_COPIES_PRINTED => 1,
             JobMapper::FIELD_PRINT_SEC_ELAPSED => 10,
             JobMapper::FIELD_PRINT_SEC_REMAINING => 20,
@@ -191,8 +191,8 @@ class JobMapperTest extends TestCase
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
         $this->assertSame(100, $job->getJobWidthMm());
         $this->assertSame(200, $job->getJobLengthMm());
-        $this->assertSame(100, $job->getMediaWidthMm());
-        $this->assertSame(200, $job->getMediaLengthMm());
+        $this->assertSame(100.4, $job->getMediaWidthMm());
+        $this->assertSame(200.5, $job->getMediaLengthMm());
         $this->assertSame(1, $job->getCopiesPrinted());
         $this->assertSame(10, $job->getPrintSecElapsed());
         $this->assertSame(20, $job->getPrintSecRemaining());

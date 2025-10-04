@@ -81,12 +81,12 @@ readonly class Job
         return $this->jobLengthMm;
     }
 
-    public function getMediaWidthMm(): int
+    public function getMediaWidthMm(): float
     {
         return $this->mediaWidthMm;
     }
 
-    public function getMediaLengthMm(): int
+    public function getMediaLengthMm(): float
     {
         return $this->mediaLengthMm;
     }
