@@ -38,6 +38,32 @@ readonly class JobMapper
     public const string FIELD_PRE_RIPPED_INFO = 'preRippedInfo';
     public const string FIELD_JOURNAL = 'journal';
 
+    public const array REQUIRED_FIELDS = [
+        self::FIELD_JOB_GUID,
+        self::FIELD_JOB_ID,
+        self::FIELD_JOB_NAME,
+        self::FIELD_JOB_STATUS,
+        self::FIELD_JOB_STATUS_DESCRIPTION,
+        self::FIELD_COPIES,
+        self::FIELD_TIME_CREATED,
+        self::FIELD_JOB_WIDTH_MM,
+        self::FIELD_JOB_LENGTH_MM,
+        self::FIELD_MEDIA_WIDTH_MM,
+        self::FIELD_MEDIA_LENGTH_MM,
+        self::FIELD_COPIES_PRINTED,
+        self::FIELD_PRINT_SEC_ELAPSED,
+        self::FIELD_PRINT_SEC_REMAINING,
+        self::FIELD_COPIES_PRINTED_BEFORE,
+        self::FIELD_PRINT_ENV,
+        self::FIELD_OWNER,
+        self::FIELD_PRINTER_ID,
+        self::FIELD_MEDIA_TYPE,
+        self::FIELD_PP_VERSION,
+        self::FIELD_CUSTOMER_INFO,
+        self::FIELD_PRE_RIPPED_INFO,
+        self::FIELD_JOURNAL,
+    ];
+
     /**
      * @param array<string, mixed> $data
      */
@@ -51,30 +77,30 @@ readonly class JobMapper
         }
 
         return new Job(
-            new JobGuid($data[self::FIELD_JOB_GUID]),
-            new JobId($data[self::FIELD_JOB_ID]),
-            new JobName($data[self::FIELD_JOB_NAME]),
-            $data[self::FIELD_JOB_STATUS],
-            $data[self::FIELD_JOB_STATUS_DESCRIPTION],
-            $data[self::FIELD_COPIES],
-            new DateTimeImmutable($data[self::FIELD_TIME_CREATED]),
-            $data[self::FIELD_JOB_WIDTH_MM],
-            $data[self::FIELD_JOB_LENGTH_MM],
-            $data[self::FIELD_MEDIA_WIDTH_MM],
-            $data[self::FIELD_MEDIA_LENGTH_MM],
-            $data[self::FIELD_COPIES_PRINTED],
-            $data[self::FIELD_PRINT_SEC_ELAPSED],
-            $data[self::FIELD_PRINT_SEC_REMAINING],
-            $timePrinted,
-            $data[self::FIELD_COPIES_PRINTED_BEFORE],
-            $data[self::FIELD_PRINT_ENV],
-            $data[self::FIELD_OWNER],
-            $data[self::FIELD_PRINTER_ID],
-            $data[self::FIELD_MEDIA_TYPE],
-            $data[self::FIELD_PP_VERSION],
-            $data[self::FIELD_CUSTOMER_INFO],
-            $data[self::FIELD_PRE_RIPPED_INFO],
-            $data[self::FIELD_JOURNAL]
+            jobGuid: new JobGuid($data[self::FIELD_JOB_GUID]),
+            jobId: new JobId($data[self::FIELD_JOB_ID]),
+            jobName: new JobName($data[self::FIELD_JOB_NAME]),
+            jobStatus: $data[self::FIELD_JOB_STATUS],
+            jobStatusDescription: $data[self::FIELD_JOB_STATUS_DESCRIPTION],
+            copies: $data[self::FIELD_COPIES],
+            timeCreated: new DateTimeImmutable($data[self::FIELD_TIME_CREATED]),
+            jobWidthMm: $data[self::FIELD_JOB_WIDTH_MM],
+            jobLengthMm: $data[self::FIELD_JOB_LENGTH_MM],
+            mediaWidthMm: (float) $data[self::FIELD_MEDIA_WIDTH_MM],
+            mediaLengthMm: (float) $data[self::FIELD_MEDIA_LENGTH_MM],
+            copiesPrinted: $data[self::FIELD_COPIES_PRINTED],
+            printSecElapsed: $data[self::FIELD_PRINT_SEC_ELAPSED],
+            printSecRemaining: $data[self::FIELD_PRINT_SEC_REMAINING],
+            timePrinted: $timePrinted,
+            copiesPrintedBefore: $data[self::FIELD_COPIES_PRINTED_BEFORE],
+            printEnv: $data[self::FIELD_PRINT_ENV],
+            owner: $data[self::FIELD_OWNER],
+            printerId: $data[self::FIELD_PRINTER_ID],
+            mediaType: $data[self::FIELD_MEDIA_TYPE],
+            ppVersion: $data[self::FIELD_PP_VERSION],
+            customerInfo: $data[self::FIELD_CUSTOMER_INFO],
+            preRippedInfo: $data[self::FIELD_PRE_RIPPED_INFO],
+            journal: $data[self::FIELD_JOURNAL]
         );
     }
 
@@ -83,35 +109,9 @@ readonly class JobMapper
      */
     private function ensureRequiredFields(array $data): void
     {
-        $requiredFields = [
-            self::FIELD_JOB_GUID,
-            self::FIELD_JOB_ID,
-            self::FIELD_JOB_NAME,
-            self::FIELD_JOB_STATUS,
-            self::FIELD_JOB_STATUS_DESCRIPTION,
-            self::FIELD_COPIES,
-            self::FIELD_TIME_CREATED,
-            self::FIELD_JOB_WIDTH_MM,
-            self::FIELD_JOB_LENGTH_MM,
-            self::FIELD_MEDIA_WIDTH_MM,
-            self::FIELD_MEDIA_LENGTH_MM,
-            self::FIELD_COPIES_PRINTED,
-            self::FIELD_PRINT_SEC_ELAPSED,
-            self::FIELD_PRINT_SEC_REMAINING,
-            self::FIELD_COPIES_PRINTED_BEFORE,
-            self::FIELD_PRINT_ENV,
-            self::FIELD_OWNER,
-            self::FIELD_PRINTER_ID,
-            self::FIELD_MEDIA_TYPE,
-            self::FIELD_PP_VERSION,
-            self::FIELD_CUSTOMER_INFO,
-            self::FIELD_PRE_RIPPED_INFO,
-            self::FIELD_JOURNAL,
-        ];
-
         $missingFields = [];
-        foreach ($requiredFields as $field) {
-            if (!isset($data[$field])) {
+        foreach (self::REQUIRED_FIELDS as $field) {
+            if (!array_key_exists($field, $data)) {
                 $missingFields[] = $field;
             }
         }
