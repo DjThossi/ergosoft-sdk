@@ -6,6 +6,8 @@ namespace DjThossi\ErgosoftSdk\Domain;
 
 use DjThossi\ErgosoftSdk\Exception\InvalidBaseUrlException;
 
+use const FILTER_VALIDATE_URL;
+
 final class BaseUrl
 {
     public readonly string $value;

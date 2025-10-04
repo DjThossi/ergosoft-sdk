@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Removed
 
+## [3.0.0] - 2025-10-04
+
+### Changed
+- Job properties adjusted to be nullable where applicable (e.g., `jobName`, `timeCreated`, `timePrinted`, `copiesPrinted`, `printSecElapsed`, `printSecRemaining`, `copiesPrintedBefore`) and examples updated to use null-safe access.
+- JobMapper now supports `timePrinted`, `timeCreated`, `jobName` as null and casts media dimensions to float where needed.
+- Refined `JobId` validation logic and added tests to cover edge cases; negative values still throw `InvalidJobIdException`.
+
+### Breaking Changes
+- Job media dimensions types changed from int to float: `getMediaWidthMm()` and `getMediaLengthMm()` now return float values for improved precision.
+
 ## [2.0.0] - 2025-09-04
 
 ### Changed
@@ -38,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/2.0.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/3.0.0...HEAD
+[3.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/3.0.0
 [2.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/2.0.0
 [1.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/1.0.0

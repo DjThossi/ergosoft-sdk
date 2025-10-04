@@ -7,10 +7,9 @@ namespace DjThossi\ErgosoftSdk\Tests\Integration;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
+use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 use DjThossi\ErgosoftSdk\SimpleErgosoftConfiguration;
-use DjThossi\ErgosoftSdk\Domain\BaseUrl;
-use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
 use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase

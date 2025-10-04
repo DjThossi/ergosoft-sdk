@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Mapper;
 
+use function array_key_exists;
+
 use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
@@ -77,8 +79,8 @@ readonly class JobMapper
         }
 
         $jobName = null;
-        if (isset($data[self::FIELD_JOB_NAME]) && trim((string)$data[self::FIELD_JOB_NAME]) !== '') {
-            $jobName = new JobName((string)$data[self::FIELD_JOB_NAME]);
+        if (isset($data[self::FIELD_JOB_NAME]) && trim((string) $data[self::FIELD_JOB_NAME]) !== '') {
+            $jobName = new JobName((string) $data[self::FIELD_JOB_NAME]);
         }
 
         $timeCreated = null;

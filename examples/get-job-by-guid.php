@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
 use DjThossi\ErgosoftSdk\SimpleErgosoftConfiguration;
-use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 
 // Initialize the Ergosoft API client with YOUR URL
 $configuration = new SimpleErgosoftConfiguration(new BaseUrl('https://YOUR_API_URL'));

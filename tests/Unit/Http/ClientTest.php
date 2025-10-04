@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Http;
 
-use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\Domain\RequestTimeout;
+use DjThossi\ErgosoftSdk\Http\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;

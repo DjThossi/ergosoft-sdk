@@ -9,7 +9,7 @@ use DjThossi\ErgosoftSdk\Exception\InvalidRequestTimeoutException;
 final readonly class RequestTimeout
 {
     public function __construct(
-        public int $seconds
+        public int $seconds,
     ) {
         if ($this->seconds < 0) {
             throw new InvalidRequestTimeoutException('RequestTimeout must be greater than or equals 0 seconds');
