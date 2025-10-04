@@ -76,14 +76,24 @@ readonly class JobMapper
             $timePrinted = new DateTimeImmutable($data[self::FIELD_TIME_PRINTED]);
         }
 
+        $jobName = null;
+        if (isset($data[self::FIELD_JOB_NAME]) && trim((string)$data[self::FIELD_JOB_NAME]) !== '') {
+            $jobName = new JobName((string)$data[self::FIELD_JOB_NAME]);
+        }
+
+        $timeCreated = null;
+        if (!empty($data[self::FIELD_TIME_CREATED])) {
+            $timeCreated = new DateTimeImmutable($data[self::FIELD_TIME_CREATED]);
+        }
+
         return new Job(
             jobGuid: new JobGuid($data[self::FIELD_JOB_GUID]),
             jobId: new JobId($data[self::FIELD_JOB_ID]),
-            jobName: new JobName($data[self::FIELD_JOB_NAME]),
+            jobName: $jobName,
             jobStatus: $data[self::FIELD_JOB_STATUS],
             jobStatusDescription: $data[self::FIELD_JOB_STATUS_DESCRIPTION],
             copies: $data[self::FIELD_COPIES],
-            timeCreated: new DateTimeImmutable($data[self::FIELD_TIME_CREATED]),
+            timeCreated: $timeCreated,
             jobWidthMm: $data[self::FIELD_JOB_WIDTH_MM],
             jobLengthMm: $data[self::FIELD_JOB_LENGTH_MM],
             mediaWidthMm: (float) $data[self::FIELD_MEDIA_WIDTH_MM],

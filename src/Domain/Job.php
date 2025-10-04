@@ -11,20 +11,20 @@ readonly class Job
     public function __construct(
         private JobGuid $jobGuid,
         private JobId $jobId,
-        private JobName $jobName,
+        private ?JobName $jobName,
         private string $jobStatus,
         private string $jobStatusDescription,
         private int $copies,
-        private DateTimeImmutable $timeCreated,
+        private ?DateTimeImmutable $timeCreated,
         private int $jobWidthMm,
         private int $jobLengthMm,
         private float $mediaWidthMm,
         private float $mediaLengthMm,
-        private int $copiesPrinted,
-        private int $printSecElapsed,
-        private int $printSecRemaining,
+        private ?int $copiesPrinted,
+        private ?int $printSecElapsed,
+        private ?int $printSecRemaining,
         private ?DateTimeImmutable $timePrinted,
-        private int $copiesPrintedBefore,
+        private ?int $copiesPrintedBefore,
         private string $printEnv,
         private string $owner,
         private string $printerId,
@@ -41,12 +41,12 @@ readonly class Job
         return $this->jobGuid;
     }
 
-    public function getJobId(): JobId
+    public function getJobId(): ?JobId
     {
         return $this->jobId;
     }
 
-    public function getJobName(): JobName
+    public function getJobName(): ?JobName
     {
         return $this->jobName;
     }
@@ -66,7 +66,7 @@ readonly class Job
         return $this->copies;
     }
 
-    public function getTimeCreated(): DateTimeImmutable
+    public function getTimeCreated(): ?DateTimeImmutable
     {
         return $this->timeCreated;
     }
@@ -91,17 +91,17 @@ readonly class Job
         return $this->mediaLengthMm;
     }
 
-    public function getCopiesPrinted(): int
+    public function getCopiesPrinted(): ?int
     {
         return $this->copiesPrinted;
     }
 
-    public function getPrintSecElapsed(): int
+    public function getPrintSecElapsed(): ?int
     {
         return $this->printSecElapsed;
     }
 
-    public function getPrintSecRemaining(): int
+    public function getPrintSecRemaining(): ?int
     {
         return $this->printSecRemaining;
     }
@@ -111,7 +111,7 @@ readonly class Job
         return $this->timePrinted;
     }
 
-    public function getCopiesPrintedBefore(): int
+    public function getCopiesPrintedBefore(): ?int
     {
         return $this->copiesPrintedBefore;
     }

@@ -19,7 +19,7 @@ final class JobIdTest extends TestCase
     public function testInvalidJobIdThrowsException(): void
     {
         $this->expectException(InvalidJobIdException::class);
-        new JobId(0);
+        new JobId(-1);
     }
 
     public function testJobIdEquality(): void

@@ -21,7 +21,7 @@ readonly class JobId
 
     private function ensure(): void
     {
-        if ($this->value < 1) {
+        if ($this->value < 0) {
             throw new InvalidJobIdException($this->value);
         }
     }

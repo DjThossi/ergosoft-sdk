@@ -18,10 +18,10 @@ try {
     foreach ($jobs as $job) {
         echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
         echo 'Job ID: ' . $job->getJobId()->value . "\n";
-        echo 'Name: ' . $job->getJobName()->value . "\n";
+        echo 'Name: ' . ($job->getJobName()?->value ?? 'N/A') . "\n";
         echo 'Status: ' . $job->getJobStatus() . ' (' . $job->getJobStatusDescription() . ")\n";
         echo 'Copies: ' . $job->getCopies() . "\n";
-        echo 'Created at: ' . $job->getTimeCreated()->format('Y-m-d H:i:s') . "\n";
+        echo 'Created at: ' . ($job->getTimeCreated()?->format('Y-m-d H:i:s') ?? 'Not given') . "\n";
         echo 'Job Width: ' . $job->getJobWidthMm() . " mm\n";
         echo 'Job Length: ' . $job->getJobLengthMm() . " mm\n";
         echo 'Media Width: ' . $job->getMediaWidthMm() . " mm\n";
@@ -29,13 +29,7 @@ try {
         echo 'Copies Printed: ' . $job->getCopiesPrinted() . "\n";
         echo 'Print Time (elapsed): ' . $job->getPrintSecElapsed() . " seconds\n";
         echo 'Print Time (remaining): ' . $job->getPrintSecRemaining() . " seconds\n";
-
-        if ($job->getTimePrinted()) {
-            echo 'Printed at: ' . $job->getTimePrinted()->format('Y-m-d H:i:s') . "\n";
-        } else {
-            echo "Printed at: Not printed\n";
-        }
-
+        echo 'Printed at: ' . ($job->getTimePrinted()?->format('Y-m-d H:i:s') ?? 'Not yet printed') . "\n";
         echo 'Copies Printed Before: ' . $job->getCopiesPrintedBefore() . "\n";
         echo 'Print Environment: ' . $job->getPrintEnv() . "\n";
         echo 'Owner: ' . $job->getOwner() . "\n";
