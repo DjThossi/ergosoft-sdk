@@ -6,6 +6,8 @@ namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\JobCollection;
+use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 use GuzzleHttp\Psr7\Response;
@@ -39,7 +41,7 @@ class GetJobsApiTest extends TestCase
     {
         $expectedResponse = new Response(200, [], json_encode([
             [
-                JobMapper::FIELD_JOB_GUID => 'test-guid-1',
+                JobMapper::FIELD_JOB_GUID => '12345678-1234-1234-1234-123456789001',
                 JobMapper::FIELD_JOB_ID => '12345',
                 JobMapper::FIELD_JOB_NAME => 'Test Job 1',
                 JobMapper::FIELD_JOB_STATUS => 'RUNNING',
@@ -65,7 +67,7 @@ class GetJobsApiTest extends TestCase
                 JobMapper::FIELD_JOURNAL => 'Journal',
             ],
             [
-                JobMapper::FIELD_JOB_GUID => 'test-guid-2',
+                JobMapper::FIELD_JOB_GUID => '12345678-1234-1234-1234-123456789002',
                 JobMapper::FIELD_JOB_ID => '67890',
                 JobMapper::FIELD_JOB_NAME => 'Test Job 2',
                 JobMapper::FIELD_JOB_STATUS => 'DONE',
@@ -97,16 +99,22 @@ class GetJobsApiTest extends TestCase
             ->with('/Trickle/get-jobs')
             ->willReturn($expectedResponse);
 
+        $jobGuid1 = new JobGuid('12345678-1234-1234-1234-123456789001');
+        $jobGuid2 = new JobGuid('12345678-1234-1234-1234-123456789002');
+
         $job1 = $this->createMock(Job::class);
+        $job1->method('getJobGuid')->willReturn($jobGuid1);
+
         $job2 = $this->createMock(Job::class);
+        $job2->method('getJobGuid')->willReturn($jobGuid2);
 
         $this->jobMapper->expects($this->exactly(2))
             ->method('mapFromArray')
             ->willReturnCallback(function ($data) use ($job1, $job2) {
-                if ($data[JobMapper::FIELD_JOB_GUID] === 'test-guid-1') {
+                if ($data[JobMapper::FIELD_JOB_GUID] === '12345678-1234-1234-1234-123456789001') {
                     return $job1;
                 }
-                if ($data[JobMapper::FIELD_JOB_GUID] === 'test-guid-2') {
+                if ($data[JobMapper::FIELD_JOB_GUID] === '12345678-1234-1234-1234-123456789002') {
                     return $job2;
                 }
 
@@ -115,9 +123,12 @@ class GetJobsApiTest extends TestCase
 
         $result = $this->api->getJobs();
 
+        $this->assertInstanceOf(JobCollection::class, $result);
         $this->assertCount(2, $result);
-        $this->assertSame($job1, $result[0]);
-        $this->assertSame($job2, $result[1]);
+        
+        $jobs = iterator_to_array($result);
+        $this->assertSame($job1, $jobs['12345678-1234-1234-1234-123456789001']);
+        $this->assertSame($job2, $jobs['12345678-1234-1234-1234-123456789002']);
     }
 
     public function testGetJobsEmpty(): void
@@ -131,6 +142,7 @@ class GetJobsApiTest extends TestCase
 
         $result = $this->api->getJobs();
 
-        $this->assertEmpty($result);
+        $this->assertInstanceOf(JobCollection::class, $result);
+        $this->assertCount(0, $result);
     }
 }

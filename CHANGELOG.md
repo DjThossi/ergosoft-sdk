@@ -12,6 +12,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Removed
 
+## [4.0.0] - 2025-10-07
+
+### Added
+- New `BaseCollection` abstract class providing common collection functionality with `Countable` and `IteratorAggregate` interfaces.
+- New `JobCollection` class for type-safe job collection handling, indexed by job GUID.
+
+### Changed
+- Updated examples to work with the new `JobCollection` return type.
+
+### Breaking Changes
+- `GetJobsApi::getJobs()` return type changed from `array` to `JobCollection`. This breaks existing code that:
+  - Uses direct array access (e.g., `$jobs[0]`, `$jobs[1]`)
+  - Passes the result to array-specific functions (e.g., `array_map()`, `array_filter()`, `array_merge()`)
+  - Uses array type hints expecting `array`
+- Jobs in the collection are now indexed by job GUID instead of numeric indices.
+- To access jobs as an array, use `iterator_to_array($jobCollection)`.
+- `count()` and `foreach` continue to work as before due to `Countable` and `IteratorAggregate` implementation.
+
 ## [3.0.0] - 2025-10-04
 
 ### Changed
@@ -48,7 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/3.0.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.0.0...HEAD
+[4.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.0.0
 [3.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/3.0.0
 [2.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/2.0.0
 [1.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/1.0.0

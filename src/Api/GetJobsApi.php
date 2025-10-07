@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Api;
 
 use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\JobCollection;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 
@@ -25,15 +26,15 @@ readonly class GetJobsApi
     /**
      * @return Job[]
      */
-    public function getJobs(): array
+    public function getJobs(): JobCollection
     {
         $response = $this->client->get(self::ENDPOINT);
         $data = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
-        $jobs = [];
+        $jobs = new JobCollection();
         if (is_array($data)) {
             foreach ($data as $jobData) {
-                $jobs[] = $this->jobMapper->mapFromArray($jobData);
+                $jobs->add($this->jobMapper->mapFromArray($jobData));
             }
         }
 
