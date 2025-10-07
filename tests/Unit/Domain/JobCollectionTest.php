@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Domain;
 
+use ArrayIterator;
 use DateTimeImmutable;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobCollection;
@@ -89,7 +90,6 @@ class JobCollectionTest extends TestCase
 
     public function testGetByJobGuidReturnsNullForNonexistentJob(): void
     {
-        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
         $nonexistentGuid = new JobGuid('99999999-9999-9999-9999-999999999999');
 
         $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
@@ -117,7 +117,7 @@ class JobCollectionTest extends TestCase
 
         $iterator = $this->collection->getIterator();
 
-        $this->assertInstanceOf(\ArrayIterator::class, $iterator);
+        $this->assertInstanceOf(ArrayIterator::class, $iterator);
         $this->assertCount(2, $iterator);
     }
 
@@ -132,6 +132,7 @@ class JobCollectionTest extends TestCase
         $this->collection->add($job3);
 
         $jobs = [];
+        /** @noinspection PhpLoopCanBeConvertedToArrayMapInspection */
         foreach ($this->collection as $key => $job) {
             $jobs[$key] = $job;
         }
@@ -151,6 +152,119 @@ class JobCollectionTest extends TestCase
         $this->collection->add($job2);
 
         $this->assertCount(2, $this->collection);
+    }
+
+    public function testHasByJobGuidReturnsTrueForExistingJob(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+
+        $this->collection->add($job);
+
+        $this->assertTrue($this->collection->hasByJobGuid($jobGuid));
+    }
+
+    public function testHasByJobGuidReturnsFalseForNonexistentJob(): void
+    {
+        $nonexistentGuid = new JobGuid('99999999-9999-9999-9999-999999999999');
+
+        $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+        $this->collection->add($job);
+
+        $this->assertFalse($this->collection->hasByJobGuid($nonexistentGuid));
+    }
+
+    public function testHasByJobGuidReturnsFalseForEmptyCollection(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+
+        $this->assertFalse($this->collection->hasByJobGuid($jobGuid));
+    }
+
+    public function testRemoveByJobGuidRemovesJob(): void
+    {
+        $jobGuid1 = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $jobGuid2 = new JobGuid('22345678-1234-1234-1234-123456789012');
+
+        $job1 = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+        $job2 = $this->createJob('22345678-1234-1234-1234-123456789012', 2, 'Job 2');
+
+        $this->collection->add($job1);
+        $this->collection->add($job2);
+
+        $this->assertSame(2, $this->collection->count());
+
+        $this->collection->removeByJobGuid($jobGuid1);
+
+        $this->assertSame(1, $this->collection->count());
+        $this->assertFalse($this->collection->hasByJobGuid($jobGuid1));
+        $this->assertTrue($this->collection->hasByJobGuid($jobGuid2));
+    }
+
+    public function testRemoveByJobGuidDoesNothingForNonexistentJob(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $nonexistentGuid = new JobGuid('99999999-9999-9999-9999-999999999999');
+
+        $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+        $this->collection->add($job);
+
+        $this->assertSame(1, $this->collection->count());
+
+        $this->collection->removeByJobGuid($nonexistentGuid);
+
+        $this->assertSame(1, $this->collection->count());
+        $this->assertTrue($this->collection->hasByJobGuid($jobGuid));
+    }
+
+    public function testRemoveByJobGuidDoesNothingForEmptyCollection(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+
+        $this->assertSame(0, $this->collection->count());
+
+        $this->collection->removeByJobGuid($jobGuid);
+
+        $this->assertSame(0, $this->collection->count());
+    }
+
+    public function testGetJobGuidsNativeReturnsArrayOfGuidStrings(): void
+    {
+        $job1 = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+        $job2 = $this->createJob('22345678-1234-1234-1234-123456789012', 2, 'Job 2');
+        $job3 = $this->createJob('32345678-1234-1234-1234-123456789012', 3, 'Job 3');
+
+        $this->collection->add($job1);
+        $this->collection->add($job2);
+        $this->collection->add($job3);
+
+        $guids = $this->collection->getJobGuidsNative();
+
+        $this->assertIsArray($guids);
+        $this->assertCount(3, $guids);
+        $this->assertSame(['12345678-1234-1234-1234-123456789012', '22345678-1234-1234-1234-123456789012', '32345678-1234-1234-1234-123456789012'], $guids);
+    }
+
+    public function testGetJobGuidsNativeReturnsEmptyArrayForEmptyCollection(): void
+    {
+        $guids = $this->collection->getJobGuidsNative();
+
+        $this->assertIsArray($guids);
+        $this->assertCount(0, $guids);
+        $this->assertSame([], $guids);
+    }
+
+    public function testGetJobGuidsNativeReturnsSingleGuid(): void
+    {
+        $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Job 1');
+
+        $this->collection->add($job);
+
+        $guids = $this->collection->getJobGuidsNative();
+
+        $this->assertIsArray($guids);
+        $this->assertCount(1, $guids);
+        $this->assertSame(['12345678-1234-1234-1234-123456789012'], $guids);
     }
 
     private function createJob(string $guidValue, int $jobIdValue, string $jobNameValue): Job

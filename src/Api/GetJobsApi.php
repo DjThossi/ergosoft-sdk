@@ -23,9 +23,6 @@ readonly class GetJobsApi
     ) {
     }
 
-    /**
-     * @return Job[]
-     */
     public function getJobs(): JobCollection
     {
         $response = $this->client->get(self::ENDPOINT);
