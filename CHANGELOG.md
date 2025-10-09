@@ -8,13 +8,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+### Fixed
+### Changed
+### Removed
+
+## [4.2.0] - 2025-10-09
+
+### Added
 - New `JsonResponseBody` domain object extending `StringResponseBody` with JSON validation and parsing methods:
   - `isValidJson()` - validates if the response body contains valid JSON
   - `getDecodedJson()` - returns decoded JSON as an associative array
-- New `TestCommunicationsResponseBody` domain object extending `JsonResponseBody` with:
-  - `getMessage()` - extracts the "message" field from JSON response
 - New `TestCommunicationsApi` endpoint for testing communications via `/Trickle/test-communications` using GET method.
 - New `TestCommunicationsResponse` domain object providing access to both status code and response body.
+- New `TestCommunicationsResponseBody` domain object extending `JsonResponseBody` with:
+    - `getMessage()` - extracts the "message" field from JSON response
 - New `createTestCommunicationsApi()` factory method in `ErgosoftFactory`.
 - Example file `examples/test-communications.php` demonstrating communications test with JSON helper methods.
 - Comprehensive unit tests for `JsonResponseBody`, `TestCommunicationsResponseBody`, `TestCommunicationsApi` and `TestCommunicationsResponse`.
@@ -43,12 +50,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Example file `examples/cancel-ripping-job.php` demonstrating ripping job cancellation with status code handling.
 - Example file `examples/cancel-printing-job.php` demonstrating printing job cancellation with status code handling.
 - Comprehensive unit tests for `CancelRippingJobApi`, `CancelPrintingJobApi`, new `StatusCode` methods, and `Client.put()` method.
-
-### Fixed
-### Changed
-- `TestCommunicationsResponse` now uses `TestCommunicationsResponseBody` instead of `StringResponseBody`, providing built-in JSON parsing capabilities.
-- Updated `examples/test-communications.php` to use the new JSON helper methods instead of manual parsing.
-### Removed
 
 ## [4.1.0] - 2025-10-09
 
@@ -120,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.1.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.2.0...HEAD
+[4.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.2.0
 [4.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.1.0
 [4.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.0.0
 [3.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/3.0.0

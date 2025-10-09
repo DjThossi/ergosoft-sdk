@@ -10,7 +10,9 @@ This library is supporting the following endpoints at the moment
 - /Trickle/get-job-by-guid
 - /Trickle/get-jobs
 - /Trickle/submit-delta-xml-file
-
+- /Trickle/subscribe-job-status
+- /Trickle/test-communications
+- /Trickle/unsubscribe-job-status
 
 This library is made for PHP projects featuring PHP version 8.4+.
 
