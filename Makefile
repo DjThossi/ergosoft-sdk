@@ -37,6 +37,9 @@ phpLatest-test-fast: ## Run phpunit without coverage with PHP version Latest
 phpLatest-test: ## Run phpunit with coverage with PHP version Latest
 	docker compose run --rm php sh -c "vendor/bin/phpunit"
 
+.PHONY: examples-deleteJob
+examples-deleteJob: ## Runs the example code for the delete-job API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/delete-job.php
 
 .PHONY: examples-getJobs
 examples-getJobs: ## Runs the example code for the get-jobs API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME

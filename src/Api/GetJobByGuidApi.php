@@ -14,6 +14,8 @@ use const JSON_THROW_ON_ERROR;
 
 readonly class GetJobByGuidApi
 {
+    private const string ENDPOINT = '/Trickle/get-job-by-guid/';
+
     public function __construct(
         private Client $client,
         private JobMapper $jobMapper,
@@ -22,7 +24,7 @@ readonly class GetJobByGuidApi
 
     public function getJobByGuid(JobGuid $jobGuid): Job
     {
-        $response = $this->client->get('/Trickle/get-job-by-guid/' . $jobGuid->value);
+        $response = $this->client->get(self::ENDPOINT . $jobGuid->value);
         $data = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
         if (empty($data)) {

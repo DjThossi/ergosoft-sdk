@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk;
 
+use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
@@ -36,6 +37,13 @@ readonly class ErgosoftFactory
     public function createSubmitDeltaXmlFileApi(): SubmitDeltaXmlFileApi
     {
         return new SubmitDeltaXmlFileApi(
+            $this->createClient()
+        );
+    }
+
+    public function createDeleteJobApi(): DeleteJobApi
+    {
+        return new DeleteJobApi(
             $this->createClient()
         );
     }

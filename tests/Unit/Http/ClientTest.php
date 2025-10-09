@@ -51,4 +51,22 @@ class ClientTest extends TestCase
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals('{"foo": "bar"}', (string) $response->getBody());
     }
+
+    public function testDelete(): void
+    {
+        $mock = new MockHandler([
+            new Response(200, [], ''),
+        ]);
+        $handlerStack = HandlerStack::create($mock);
+        $guzzleClient = new GuzzleClient(['handler' => $handlerStack]);
+
+        $client = new Client(new BaseUrl('https://api.ergosoft.de'), new RequestTimeout(5));
+        $reflection = new ReflectionClass($client);
+        $property = $reflection->getProperty('client');
+        $property->setValue($client, $guzzleClient);
+
+        $response = $client->delete('/test');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('', (string) $response->getBody());
+    }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Integration;
 
+use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
@@ -36,6 +37,14 @@ class FactoryTest extends TestCase
 
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(SubmitDeltaXmlFileApi::class, $factory->createSubmitDeltaXmlFileApi());
+    }
+
+    public function testCreateDeleteJobApi(): void
+    {
+        $factory = $this->createErgosoftFactory();
+
+        /* @noinspection UnnecessaryAssertionInspection */
+        $this->assertInstanceOf(DeleteJobApi::class, $factory->createDeleteJobApi());
     }
 
     private function createErgosoftFactory(): ErgosoftFactory

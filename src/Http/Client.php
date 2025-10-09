@@ -37,4 +37,9 @@ class Client
             'body' => $body,
         ]);
     }
+
+    public function delete(string $endpoint): ResponseInterface
+    {
+        return $this->client->delete($this->baseUrl . '/' . ltrim($endpoint, '/'));
+    }
 }

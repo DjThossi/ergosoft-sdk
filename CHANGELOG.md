@@ -12,6 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Removed
 
+## [4.1.0] - 2025-10-09
+
+### Added
+- New `DeleteJobApi` endpoint for deleting jobs via `/Trickle/delete-job/{guid}` using DELETE method.
+- New `StatusCode` value object with helper methods for HTTP status code validation:
+  - `isSuccessful()` - checks if status code is in 200-299 range
+  - `isOk()` - checks for 200 status code
+  - `isNoContent()` - checks for 204 status code
+  - `isBadRequest()` - checks for 400 status code
+  - `isForbidden()` - checks for 403 status code
+  - `isNotFound()` - checks for 404 status code
+- New `delete()` method in `Http\Client` for DELETE requests.
+- New `createDeleteJobApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/delete-job.php` demonstrating job deletion with status code handling.
+- Comprehensive unit tests for `DeleteJobApi`, `StatusCode`, and `Client.delete()` method.
+
 ## [4.0.0] - 2025-10-07
 
 ### Added
@@ -66,7 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.0.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.1.0...HEAD
+[4.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.1.0
 [4.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.0.0
 [3.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/3.0.0
 [2.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/2.0.0
