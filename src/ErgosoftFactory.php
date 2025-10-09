@@ -11,6 +11,7 @@ use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\SubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
+use DjThossi\ErgosoftSdk\Api\UnsubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 
@@ -68,6 +69,13 @@ readonly class ErgosoftFactory
     public function createSubscribeJobStatusApi(): SubscribeJobStatusApi
     {
         return new SubscribeJobStatusApi(
+            $this->createClient()
+        );
+    }
+
+    public function createUnsubscribeJobStatusApi(): UnsubscribeJobStatusApi
+    {
+        return new UnsubscribeJobStatusApi(
             $this->createClient()
         );
     }

@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New `UnsubscribeJobStatusApi` endpoint for unsubscribing from job status updates via `/Trickle/unsubscribe-job-status/{guid}?endpoint={endpoint}` using DELETE method.
+- New `UnsubscribeJobStatusResponse` domain object providing access to both status code and response body.
+- New `StringResponseBody` domain object for wrapping string response bodies (allows empty strings).
+- New `createUnsubscribeJobStatusApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/unsubscribe-job-status.php` demonstrating job status unsubscription with response handling.
+- Comprehensive unit tests for `UnsubscribeJobStatusApi` and `UnsubscribeJobStatusResponse`.
 - New `SubscribeJobStatusApi` endpoint for subscribing to job status updates via `/Trickle/subscribe-job-status` using POST method with JSON request body.
 - New `Endpoint` domain object with URL validation for webhook endpoints.
 - New `SubscribeJobStatusResponse` domain object providing access to both status code and response body.
