@@ -40,4 +40,19 @@ readonly class StatusCode
     {
         return $this->value === 404;
     }
+
+    public function isConflict(): bool
+    {
+        return $this->value === 409;
+    }
+
+    public function isServerError(): bool
+    {
+        return $this->value === 500;
+    }
+
+    public function isServiceUnavailable(): bool
+    {
+        return $this->value === 503;
+    }
 }

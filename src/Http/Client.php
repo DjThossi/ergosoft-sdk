@@ -38,6 +38,11 @@ class Client
         ]);
     }
 
+    public function put(string $endpoint): ResponseInterface
+    {
+        return $this->client->put($this->baseUrl . '/' . ltrim($endpoint, '/'));
+    }
+
     public function delete(string $endpoint): ResponseInterface
     {
         return $this->client->delete($this->baseUrl . '/' . ltrim($endpoint, '/'));

@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New `CancelRippingJobApi` endpoint for cancelling ripping jobs via `/Trickle/cancel-ripping-job/{guid}` using PUT method.
+- New status code helper methods in `StatusCode`:
+  - `isConflict()` - checks for 409 status code
+  - `isServerError()` - checks for 500 status code
+  - `isServiceUnavailable()` - checks for 503 status code
+- New `put()` method in `Http\Client` for PUT requests.
+- New `createCancelRippingJobApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/cancel-ripping-job.php` demonstrating job cancellation with status code handling.
+- Comprehensive unit tests for `CancelRippingJobApi`, new `StatusCode` methods, and `Client.put()` method.
+
 ### Fixed
 ### Changed
 ### Removed

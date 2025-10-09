@@ -170,4 +170,58 @@ class StatusCodeTest extends TestCase
         $this->assertFalse($statusCode->isForbidden());
         $this->assertTrue($statusCode->isNotFound());
     }
+
+    public function testIsConflict(): void
+    {
+        $statusCode = new StatusCode(409);
+        $this->assertTrue($statusCode->isConflict());
+    }
+
+    public function testIsConflictReturnsFalseForOtherCodes(): void
+    {
+        $statusCode = new StatusCode(200);
+        $this->assertFalse($statusCode->isConflict());
+        
+        $statusCode = new StatusCode(404);
+        $this->assertFalse($statusCode->isConflict());
+        
+        $statusCode = new StatusCode(500);
+        $this->assertFalse($statusCode->isConflict());
+    }
+
+    public function testIsServerError(): void
+    {
+        $statusCode = new StatusCode(500);
+        $this->assertTrue($statusCode->isServerError());
+    }
+
+    public function testIsServerErrorReturnsFalseForOtherCodes(): void
+    {
+        $statusCode = new StatusCode(200);
+        $this->assertFalse($statusCode->isServerError());
+        
+        $statusCode = new StatusCode(404);
+        $this->assertFalse($statusCode->isServerError());
+        
+        $statusCode = new StatusCode(503);
+        $this->assertFalse($statusCode->isServerError());
+    }
+
+    public function testIsServiceUnavailable(): void
+    {
+        $statusCode = new StatusCode(503);
+        $this->assertTrue($statusCode->isServiceUnavailable());
+    }
+
+    public function testIsServiceUnavailableReturnsFalseForOtherCodes(): void
+    {
+        $statusCode = new StatusCode(200);
+        $this->assertFalse($statusCode->isServiceUnavailable());
+        
+        $statusCode = new StatusCode(404);
+        $this->assertFalse($statusCode->isServiceUnavailable());
+        
+        $statusCode = new StatusCode(500);
+        $this->assertFalse($statusCode->isServiceUnavailable());
+    }
 }
