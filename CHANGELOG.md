@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New `JsonResponseBody` domain object extending `StringResponseBody` with JSON validation and parsing methods:
+  - `isValidJson()` - validates if the response body contains valid JSON
+  - `getDecodedJson()` - returns decoded JSON as an associative array
+- New `TestCommunicationsResponseBody` domain object extending `JsonResponseBody` with:
+  - `getMessage()` - extracts the "message" field from JSON response
+- New `TestCommunicationsApi` endpoint for testing communications via `/Trickle/test-communications` using GET method.
+- New `TestCommunicationsResponse` domain object providing access to both status code and response body.
+- New `createTestCommunicationsApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/test-communications.php` demonstrating communications test with JSON helper methods.
+- Comprehensive unit tests for `JsonResponseBody`, `TestCommunicationsResponseBody`, `TestCommunicationsApi` and `TestCommunicationsResponse`.
 - New `UnsubscribeJobStatusApi` endpoint for unsubscribing from job status updates via `/Trickle/unsubscribe-job-status/{guid}?endpoint={endpoint}` using DELETE method.
 - New `UnsubscribeJobStatusResponse` domain object providing access to both status code and response body.
 - New `StringResponseBody` domain object for wrapping string response bodies (allows empty strings).
@@ -36,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 ### Changed
+- `TestCommunicationsResponse` now uses `TestCommunicationsResponseBody` instead of `StringResponseBody`, providing built-in JSON parsing capabilities.
+- Updated `examples/test-communications.php` to use the new JSON helper methods instead of manual parsing.
 ### Removed
 
 ## [4.1.0] - 2025-10-09

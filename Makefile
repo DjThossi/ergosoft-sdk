@@ -65,6 +65,10 @@ examples-submitDeltaXmlFile: ## Runs the example code for the submit-delta-xml-f
 examples-subscribeJobStatus: ## Runs the example code for the subscribe-job-status API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/subscribe-job-status.php
 
+.PHONY: examples-testCommunications
+examples-testCommunications: ## Runs the example code for the test-communications API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/test-communications.php
+
 .PHONY: examples-unsubscribeJobStatus
 examples-unsubscribeJobStatus: ## Runs the example code for the unsubscribe-job-status API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/unsubscribe-job-status.php

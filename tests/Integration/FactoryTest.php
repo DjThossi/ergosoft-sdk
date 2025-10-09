@@ -11,6 +11,7 @@ use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
 use DjThossi\ErgosoftSdk\Api\SubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
+use DjThossi\ErgosoftSdk\Api\TestCommunicationsApi;
 use DjThossi\ErgosoftSdk\Api\UnsubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
@@ -81,6 +82,14 @@ class FactoryTest extends TestCase
 
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(UnsubscribeJobStatusApi::class, $factory->createUnsubscribeJobStatusApi());
+    }
+
+    public function testCreateTestCommunicationsApi(): void
+    {
+        $factory = $this->createErgosoftFactory();
+
+        /* @noinspection UnnecessaryAssertionInspection */
+        $this->assertInstanceOf(TestCommunicationsApi::class, $factory->createTestCommunicationsApi());
     }
 
     private function createErgosoftFactory(): ErgosoftFactory
