@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Integration;
 
+use DjThossi\ErgosoftSdk\Api\CancelPrintingJobApi;
 use DjThossi\ErgosoftSdk\Api\CancelRippingJobApi;
 use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
@@ -54,6 +55,14 @@ class FactoryTest extends TestCase
 
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(CancelRippingJobApi::class, $factory->createCancelRippingJobApi());
+    }
+
+    public function testCreateCancelPrintingJobApi(): void
+    {
+        $factory = $this->createErgosoftFactory();
+
+        /* @noinspection UnnecessaryAssertionInspection */
+        $this->assertInstanceOf(CancelPrintingJobApi::class, $factory->createCancelPrintingJobApi());
     }
 
     private function createErgosoftFactory(): ErgosoftFactory

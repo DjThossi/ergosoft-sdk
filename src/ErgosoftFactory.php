@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk;
 
+use DjThossi\ErgosoftSdk\Api\CancelPrintingJobApi;
 use DjThossi\ErgosoftSdk\Api\CancelRippingJobApi;
 use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
@@ -52,6 +53,13 @@ readonly class ErgosoftFactory
     public function createCancelRippingJobApi(): CancelRippingJobApi
     {
         return new CancelRippingJobApi(
+            $this->createClient()
+        );
+    }
+
+    public function createCancelPrintingJobApi(): CancelPrintingJobApi
+    {
+        return new CancelPrintingJobApi(
             $this->createClient()
         );
     }

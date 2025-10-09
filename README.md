@@ -4,8 +4,11 @@ A PHP library for interacting with the Ergosoft Delta Automation API.
 
 This library is supporting the following endpoints at the moment
 
-- /Trickle/get-jobs
+- /Trickle/cancel-printing-job
+- /Trickle/cancel-ripping-job
+- /Trickle/delete-job
 - /Trickle/get-job-by-guid
+- /Trickle/get-jobs
 - /Trickle/submit-delta-xml-file
 
 

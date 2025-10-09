@@ -37,21 +37,25 @@ phpLatest-test-fast: ## Run phpunit without coverage with PHP version Latest
 phpLatest-test: ## Run phpunit with coverage with PHP version Latest
 	docker compose run --rm php sh -c "vendor/bin/phpunit"
 
-.PHONY: examples-deleteJob
-examples-deleteJob: ## Runs the example code for the delete-job API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
-	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/delete-job.php
+.PHONY: examples-cancelPrintingJob
+examples-cancelPrintingJob: ## Runs the example code for the cancel-printing-job API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/cancel-printing-job.php
 
 .PHONY: examples-cancelRippingJob
 examples-cancelRippingJob: ## Runs the example code for the cancel-ripping-job API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/cancel-ripping-job.php
 
-.PHONY: examples-getJobs
-examples-getJobs: ## Runs the example code for the get-jobs API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
-	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/get-jobs.php
+.PHONY: examples-deleteJob
+examples-deleteJob: ## Runs the example code for the delete-job API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/delete-job.php
 
 .PHONY: examples-getJobByGuid
 examples-getJobByGuid: ## Runs the example code for the get-job-by-guid API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/get-job-by-guid.php
+
+.PHONY: examples-getJobs
+examples-getJobs: ## Runs the example code for the get-jobs API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/get-jobs.php
 
 .PHONY: examples-submitDeltaXmlFile
 examples-submitDeltaXmlFile: ## Runs the example code for the submit-delta-xml-file API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
