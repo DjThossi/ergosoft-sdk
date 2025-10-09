@@ -60,3 +60,7 @@ examples-getJobs: ## Runs the example code for the get-jobs API in the PHP versi
 .PHONY: examples-submitDeltaXmlFile
 examples-submitDeltaXmlFile: ## Runs the example code for the submit-delta-xml-file API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
 	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/submit-delta-xml-file.php
+
+.PHONY: examples-subscribeJobStatus
+examples-subscribeJobStatus: ## Runs the example code for the subscribe-job-status API in the PHP version which is defined in DOCKER_COMPOSE_SERVICE_NAME
+	docker compose run --rm ${DOCKER_COMPOSE_SERVICE_NAME} php examples/subscribe-job-status.php

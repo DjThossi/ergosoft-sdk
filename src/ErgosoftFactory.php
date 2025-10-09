@@ -9,6 +9,7 @@ use DjThossi\ErgosoftSdk\Api\CancelRippingJobApi;
 use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
+use DjThossi\ErgosoftSdk\Api\SubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
@@ -60,6 +61,13 @@ readonly class ErgosoftFactory
     public function createCancelPrintingJobApi(): CancelPrintingJobApi
     {
         return new CancelPrintingJobApi(
+            $this->createClient()
+        );
+    }
+
+    public function createSubscribeJobStatusApi(): SubscribeJobStatusApi
+    {
+        return new SubscribeJobStatusApi(
             $this->createClient()
         );
     }

@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New `SubscribeJobStatusApi` endpoint for subscribing to job status updates via `/Trickle/subscribe-job-status` using POST method with JSON request body.
+- New `Endpoint` domain object with URL validation for webhook endpoints.
+- New `SubscribeJobStatusResponse` domain object providing access to both status code and response body.
+- New `InvalidEndpointException` for validation errors on endpoint URLs.
+- New `createSubscribeJobStatusApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/subscribe-job-status.php` demonstrating job status subscription with request/response handling.
+- Comprehensive unit tests for `SubscribeJobStatusApi`, `Endpoint`, and `SubscribeJobStatusResponse`.
 - New `CancelRippingJobApi` endpoint for cancelling ripping jobs via `/Trickle/cancel-ripping-job/{guid}` using PUT method.
 - New `CancelPrintingJobApi` endpoint for cancelling printing jobs via `/Trickle/cancel-printing-job/{guid}` using PUT method.
 - New status code helper methods in `StatusCode`:

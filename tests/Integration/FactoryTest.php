@@ -9,6 +9,7 @@ use DjThossi\ErgosoftSdk\Api\CancelRippingJobApi;
 use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
+use DjThossi\ErgosoftSdk\Api\SubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
 use DjThossi\ErgosoftSdk\Domain\BaseUrl;
 use DjThossi\ErgosoftSdk\ErgosoftFactory;
@@ -63,6 +64,14 @@ class FactoryTest extends TestCase
 
         /* @noinspection UnnecessaryAssertionInspection */
         $this->assertInstanceOf(CancelPrintingJobApi::class, $factory->createCancelPrintingJobApi());
+    }
+
+    public function testCreateSubscribeJobStatusApi(): void
+    {
+        $factory = $this->createErgosoftFactory();
+
+        /* @noinspection UnnecessaryAssertionInspection */
+        $this->assertInstanceOf(SubscribeJobStatusApi::class, $factory->createSubscribeJobStatusApi());
     }
 
     private function createErgosoftFactory(): ErgosoftFactory

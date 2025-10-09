@@ -31,10 +31,10 @@ class Client
         return $this->client->get($this->baseUrl . '/' . ltrim($endpoint, '/'));
     }
 
-    public function post(string $endpoint, string $body): ResponseInterface
+    public function post(string $endpoint, string $jsonBody): ResponseInterface
     {
         return $this->client->post($this->baseUrl . '/' . ltrim($endpoint, '/'), [
-            'body' => $body,
+            'body' => $jsonBody,
         ]);
     }
 
