@@ -6,6 +6,9 @@ namespace DjThossi\ErgosoftSdk\Api;
 
 use DjThossi\ErgosoftSdk\Domain\HotFile;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\StatusCode;
+use DjThossi\ErgosoftSdk\Domain\SubmitDeltaXmlFileResponse;
+use DjThossi\ErgosoftSdk\Domain\SubmitDeltaXmlFileResponseBody;
 use DjThossi\ErgosoftSdk\Http\Client;
 
 use const JSON_THROW_ON_ERROR;
@@ -19,12 +22,17 @@ readonly class SubmitDeltaXmlFileApi
     ) {
     }
 
-    public function submitDeltaXmlFile(HotFile $hotFile): JobGuid
+    public function submitDeltaXmlFile(HotFile $hotFile): SubmitDeltaXmlFileResponse
     {
         $jsonContent = json_encode($hotFile->value, JSON_THROW_ON_ERROR);
         $response = $this->client->post(self::ENDPOINT, $jsonContent);
-        $jobGuidString = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        $responseBody = (string) $response->getBody();
+        $jobGuidString = json_decode($responseBody, true, 512, JSON_THROW_ON_ERROR);
 
-        return new JobGuid($jobGuidString);
+        return new SubmitDeltaXmlFileResponse(
+            new StatusCode($response->getStatusCode()),
+            new JobGuid($jobGuidString),
+            new SubmitDeltaXmlFileResponseBody($responseBody)
+        );
     }
 }

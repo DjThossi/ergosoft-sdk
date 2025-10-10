@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `GetJobByGuidResponse` domain object providing access to status code, job, and response body
 - New `GetJobByGuidResponseBody` domain object extending `JsonResponseBody` for structured access to the raw JSON response.
 - Comprehensive unit tests for `GetJobByGuidResponse` and updated tests for `GetJobByGuidApi`.
+- New `SubmitDeltaXmlFileResponse` domain object providing access to status code, job GUID, and response body
+- New `SubmitDeltaXmlFileResponseBody` domain object extending `JsonResponseBody` for structured access to the raw JSON response.
+- Comprehensive unit tests for `SubmitDeltaXmlFileResponse` and updated tests for `SubmitDeltaXmlFileApi`.
 
 ### Fixed
 ### Changed
@@ -26,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Job::getJobStatus()` return type changed from `string` to `JobStatus` object.
 - `GetJobsApi::getJobs()` now returns `GetJobsResponse` instead of `JobCollection` directly, providing access to HTTP status code and raw response body alongside the job collection.
 - `GetJobByGuidApi::getJobByGuid()` now returns `GetJobByGuidResponse` instead of `Job` directly, providing access to HTTP status code and raw response body alongside the job.
+- `SubmitDeltaXmlFileApi::submitDeltaXmlFile()` now returns `SubmitDeltaXmlFileResponse` instead of `JobGuid` directly, providing access to HTTP status code and raw response body alongside the job GUID.
 
 ### Removed
 
@@ -53,6 +57,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `$response->statusCode` - HTTP status code as `StatusCode` object
   - `$response->job` - The job as `Job` object
   - `$response->responseBody` - Raw response body as `GetJobByGuidResponseBody` object
+- `SubmitDeltaXmlFileApi::submitDeltaXmlFile()` now returns `SubmitDeltaXmlFileResponse` instead of `JobGuid` directly. Access the job GUID via `$response->jobGuid`.
+- Code that directly uses the result as a JobGuid object must be updated to access the `jobGuid` property.
+- Example migration:
+  - Before: `$jobGuid = $api->submitDeltaXmlFile($hotFile); echo $jobGuid->value;`
+  - After: `$response = $api->submitDeltaXmlFile($hotFile); echo $response->jobGuid->value;`
+- The `SubmitDeltaXmlFileResponse` object provides additional properties:
+  - `$response->statusCode` - HTTP status code as `StatusCode` object
+  - `$response->jobGuid` - The job GUID as `JobGuid` object
+  - `$response->responseBody` - Raw response body as `SubmitDeltaXmlFileResponseBody` object
 
 ## [4.2.0] - 2025-10-09
 

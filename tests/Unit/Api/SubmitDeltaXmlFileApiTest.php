@@ -6,7 +6,7 @@ namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
 use DjThossi\ErgosoftSdk\Domain\HotFile;
-use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\SubmitDeltaXmlFileResponse;
 use DjThossi\ErgosoftSdk\Http\Client;
 use GuzzleHttp\Psr7\Response;
 
@@ -43,7 +43,9 @@ class SubmitDeltaXmlFileApiTest extends TestCase
 
         $result = $this->api->submitDeltaXmlFile($hotFile);
 
-        $this->assertInstanceOf(JobGuid::class, $result);
-        $this->assertSame($expectedJobGuid, $result->value);
+        $this->assertInstanceOf(SubmitDeltaXmlFileResponse::class, $result);
+        $this->assertSame(200, $result->statusCode->value);
+        $this->assertSame($expectedJobGuid, $result->jobGuid->value);
+        $this->assertTrue($result->responseBody->isValidJson());
     }
 }
