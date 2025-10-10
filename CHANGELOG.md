@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Fixed
+
+### Changed
+
+### Removed
+
+### Breaking Changes
+
+## [5.0.0] - 2025-10-10
+
+### Added
 - New `JobStatus` domain object for type-safe job status handling with:
   - Non-empty validation (throws `InvalidJobStatusException` for empty or whitespace-only strings)
   - `getShortVersion()` method that extracts text before the first space
@@ -23,15 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `SubmitDeltaXmlFileResponseBody` domain object extending `JsonResponseBody` for structured access to the raw JSON response.
 - Comprehensive unit tests for `SubmitDeltaXmlFileResponse` and updated tests for `SubmitDeltaXmlFileApi`.
 
-### Fixed
 ### Changed
 - `Job::$jobStatus` property type changed from `string` to `JobStatus` object.
 - `Job::getJobStatus()` return type changed from `string` to `JobStatus` object.
 - `GetJobsApi::getJobs()` now returns `GetJobsResponse` instead of `JobCollection` directly, providing access to HTTP status code and raw response body alongside the job collection.
 - `GetJobByGuidApi::getJobByGuid()` now returns `GetJobByGuidResponse` instead of `Job` directly, providing access to HTTP status code and raw response body alongside the job.
 - `SubmitDeltaXmlFileApi::submitDeltaXmlFile()` now returns `SubmitDeltaXmlFileResponse` instead of `JobGuid` directly, providing access to HTTP status code and raw response body alongside the job GUID.
-
-### Removed
 
 ### Breaking Changes
 - `Job::getJobStatus()` now returns a `JobStatus` object instead of a string. Access the string value via `$job->getJobStatus()->value`.
@@ -176,7 +185,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/4.2.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.0.0...HEAD
+[5.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.0.0
 [4.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.2.0
 [4.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.1.0
 [4.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.0.0
