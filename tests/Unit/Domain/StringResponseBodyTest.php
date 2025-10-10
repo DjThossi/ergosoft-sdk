@@ -37,7 +37,7 @@ class StringResponseBodyTest extends TestCase
 
     public function testConstructorWithSpecialCharacters(): void
     {
-        $specialString = "Special chars: äöü ß € @ # $ % & * ()";
+        $specialString = 'Special chars: äöü ß € @ # $ % & * ()';
         $responseBody = new StringResponseBody($specialString);
         $this->assertEquals($specialString, $responseBody->value);
     }

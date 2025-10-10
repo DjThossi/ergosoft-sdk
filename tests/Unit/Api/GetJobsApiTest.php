@@ -125,7 +125,7 @@ class GetJobsApiTest extends TestCase
 
         $this->assertInstanceOf(JobCollection::class, $result);
         $this->assertCount(2, $result);
-        
+
         $jobs = iterator_to_array($result);
         $this->assertSame($job1, $jobs['12345678-1234-1234-1234-123456789001']);
         $this->assertSame($job2, $jobs['12345678-1234-1234-1234-123456789002']);

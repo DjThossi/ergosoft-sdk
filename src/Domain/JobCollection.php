@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace DjThossi\ErgosoftSdk\Domain;
 
 /** @method Job[] getIterator() */

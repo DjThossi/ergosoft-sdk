@@ -21,9 +21,9 @@ try {
     $statusCode = $api->cancelRippingJob($jobGuid);
     echo "Cancel ripping job request sent for GUID {$jobGuid->value}.\n";
     echo "Response Status Code: {$statusCode->value}\n";
-    
+
     if ($statusCode->isSuccessful()) {
-        echo "Success! ";
+        echo 'Success! ';
         if ($statusCode->isOk()) {
             echo "Ripping job cancelled (200 OK)\n";
         }

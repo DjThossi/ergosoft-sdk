@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Api;
 
-use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobCollection;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;

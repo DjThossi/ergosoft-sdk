@@ -37,7 +37,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(200, $statusCode->value);
         $this->assertTrue($statusCode->isSuccessful());
@@ -56,7 +56,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(400, $statusCode->value);
         $this->assertFalse($statusCode->isSuccessful());
@@ -74,7 +74,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(403, $statusCode->value);
         $this->assertTrue($statusCode->isForbidden());
@@ -91,7 +91,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(404, $statusCode->value);
         $this->assertTrue($statusCode->isNotFound());
@@ -108,7 +108,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(409, $statusCode->value);
         $this->assertTrue($statusCode->isConflict());
@@ -125,7 +125,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(500, $statusCode->value);
         $this->assertTrue($statusCode->isServerError());
@@ -142,7 +142,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(503, $statusCode->value);
         $this->assertTrue($statusCode->isServiceUnavailable());
@@ -159,7 +159,7 @@ class CancelRippingJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->cancelRippingJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(200, $statusCode->value);
         $this->assertTrue($statusCode->isSuccessful());

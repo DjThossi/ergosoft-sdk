@@ -10,9 +10,10 @@ use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Domain\SubscribeJobStatusResponse;
 use DjThossi\ErgosoftSdk\Http\Client;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
 
 use const JSON_THROW_ON_ERROR;
+
+use PHPUnit\Framework\TestCase;
 
 class SubscribeJobStatusApiTest extends TestCase
 {
@@ -143,7 +144,8 @@ class SubscribeJobStatusApiTest extends TestCase
                 $this->equalTo('/Trickle/subscribe-job-status'),
                 $this->callback(function ($requestBody) {
                     $decoded = json_decode($requestBody, true);
-                    return isset($decoded['jobGuid']) 
+
+                    return isset($decoded['jobGuid'])
                         && isset($decoded['endpoint'])
                         && $decoded['jobGuid'] === 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee'
                         && $decoded['endpoint'] === 'https://api.example.com/v1/webhooks/job-status';

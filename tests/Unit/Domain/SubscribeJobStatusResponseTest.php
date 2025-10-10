@@ -15,9 +15,9 @@ class SubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new StringResponseBody('Subscription successful');
-        
+
         $response = new SubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('Subscription successful', $response->responseBody->value);
@@ -27,9 +27,9 @@ class SubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new StringResponseBody('');
-        
+
         $response = new SubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('', $response->responseBody->value);
@@ -39,9 +39,9 @@ class SubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(400);
         $responseBody = new StringResponseBody('Bad request error message');
-        
+
         $response = new SubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertEquals(400, $response->statusCode->value);
         $this->assertTrue($response->statusCode->isBadRequest());
@@ -53,9 +53,9 @@ class SubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new StringResponseBody('{"message": "Subscribed successfully", "subscriptionId": "abc123"}');
-        
+
         $response = new SubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('{"message": "Subscribed successfully", "subscriptionId": "abc123"}', $response->responseBody->value);
@@ -65,10 +65,10 @@ class SubscribeJobStatusResponseTest extends TestCase
     {
         $response1 = new SubscribeJobStatusResponse(new StatusCode(200), new StringResponseBody('Response 1'));
         $response2 = new SubscribeJobStatusResponse(new StatusCode(400), new StringResponseBody('Response 2'));
-        
+
         $this->assertEquals(200, $response1->statusCode->value);
         $this->assertEquals('Response 1', $response1->responseBody->value);
-        
+
         $this->assertEquals(400, $response2->statusCode->value);
         $this->assertEquals('Response 2', $response2->responseBody->value);
     }

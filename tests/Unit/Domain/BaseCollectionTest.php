@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Domain;
 
+use ArrayIterator;
 use DjThossi\ErgosoftSdk\Domain\BaseCollection;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +38,7 @@ class BaseCollectionTest extends TestCase
 
         $iterator = $this->collection->getIterator();
 
-        $this->assertInstanceOf(\ArrayIterator::class, $iterator);
+        $this->assertInstanceOf(ArrayIterator::class, $iterator);
         $this->assertSame(['item1', 'item2'], $iterator->getArrayCopy());
     }
 
@@ -45,7 +46,7 @@ class BaseCollectionTest extends TestCase
     {
         $iterator = $this->collection->getIterator();
 
-        $this->assertInstanceOf(\ArrayIterator::class, $iterator);
+        $this->assertInstanceOf(ArrayIterator::class, $iterator);
         $this->assertCount(0, $iterator);
     }
 
@@ -162,7 +163,7 @@ class BaseCollectionTest extends TestCase
 }
 
 /**
- * Concrete implementation of BaseCollection for testing purposes
+ * Concrete implementation of BaseCollection for testing purposes.
  */
 class TestableCollection extends BaseCollection
 {

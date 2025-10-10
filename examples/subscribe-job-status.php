@@ -18,7 +18,7 @@ $api = $factory->createSubscribeJobStatusApi();
 // Replace with the actual job GUID and webhook endpoint
 $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789abc');
 $endpoint = new Endpoint('https://your-webhook-server.com/job-status-callback');
-//The endpoint must accept a "PUT" request with this JSON: {'JobGuid': '12345678-1234-1234-1234-123456789abc', 'Status': 'WAITINGFORPRINT'}
+// The endpoint must accept a "PUT" request with this JSON: {'JobGuid': '12345678-1234-1234-1234-123456789abc', 'Status': 'WAITINGFORPRINT'}
 
 try {
     $response = $api->subscribeJobStatus($jobGuid, $endpoint);
@@ -26,9 +26,9 @@ try {
     echo "Webhook endpoint: {$endpoint->value}\n";
     echo "Response Status Code: {$response->statusCode->value}\n";
     echo "Response Body: {$response->responseBody->value}\n\n";
-    
+
     if ($response->statusCode->isSuccessful()) {
-        echo "Success! ";
+        echo 'Success! ';
         if ($response->statusCode->isOk()) {
             echo "Subscription successful (200 OK)\n";
         }

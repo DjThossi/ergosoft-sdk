@@ -132,7 +132,7 @@ class JobCollectionTest extends TestCase
         $this->collection->add($job3);
 
         $jobs = [];
-        /** @noinspection PhpLoopCanBeConvertedToArrayMapInspection */
+        /* @noinspection PhpLoopCanBeConvertedToArrayMapInspection */
         foreach ($this->collection as $key => $job) {
             $jobs[$key] = $job;
         }

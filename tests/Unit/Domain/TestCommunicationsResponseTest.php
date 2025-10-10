@@ -15,9 +15,9 @@ class TestCommunicationsResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new TestCommunicationsResponseBody('{"message": "Ergosoft Communications is alive."}');
-        
+
         $response = new TestCommunicationsResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('{"message": "Ergosoft Communications is alive."}', $response->responseBody->value);
@@ -27,9 +27,9 @@ class TestCommunicationsResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new TestCommunicationsResponseBody('');
-        
+
         $response = new TestCommunicationsResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('', $response->responseBody->value);
@@ -39,9 +39,9 @@ class TestCommunicationsResponseTest extends TestCase
     {
         $statusCode = new StatusCode(500);
         $responseBody = new TestCommunicationsResponseBody('Internal server error');
-        
+
         $response = new TestCommunicationsResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertEquals(500, $response->statusCode->value);
         $this->assertTrue($response->statusCode->isServerError());
@@ -53,9 +53,9 @@ class TestCommunicationsResponseTest extends TestCase
     {
         $statusCode = new StatusCode(503);
         $responseBody = new TestCommunicationsResponseBody('Service unavailable');
-        
+
         $response = new TestCommunicationsResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertEquals(503, $response->statusCode->value);
         $this->assertTrue($response->statusCode->isServiceUnavailable());
@@ -67,10 +67,10 @@ class TestCommunicationsResponseTest extends TestCase
     {
         $response1 = new TestCommunicationsResponse(new StatusCode(200), new TestCommunicationsResponseBody('Response 1'));
         $response2 = new TestCommunicationsResponse(new StatusCode(500), new TestCommunicationsResponseBody('Response 2'));
-        
+
         $this->assertEquals(200, $response1->statusCode->value);
         $this->assertEquals('Response 1', $response1->responseBody->value);
-        
+
         $this->assertEquals(500, $response2->statusCode->value);
         $this->assertEquals('Response 2', $response2->responseBody->value);
     }

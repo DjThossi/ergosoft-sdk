@@ -13,7 +13,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": "Ergosoft Communications is alive."}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertEquals('Ergosoft Communications is alive.', $responseBody->getMessage());
     }
 
@@ -21,7 +21,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"status": "ok", "code": 200}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertNull($responseBody->getMessage());
     }
 
@@ -29,14 +29,14 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $invalidJson = '{invalid json}';
         $responseBody = new TestCommunicationsResponseBody($invalidJson);
-        
+
         $this->assertNull($responseBody->getMessage());
     }
 
     public function testGetMessageWithEmptyString(): void
     {
         $responseBody = new TestCommunicationsResponseBody('');
-        
+
         $this->assertNull($responseBody->getMessage());
     }
 
@@ -44,7 +44,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": ""}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertEquals('', $responseBody->getMessage());
     }
 
@@ -52,7 +52,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": null}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertNull($responseBody->getMessage());
     }
 
@@ -60,7 +60,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": "Test message", "data": {"nested": "value"}, "code": 200}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertEquals('Test message', $responseBody->getMessage());
     }
 
@@ -68,7 +68,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": "Hëllö Wörld 😀"}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertEquals('Hëllö Wörld 😀', $responseBody->getMessage());
     }
 
@@ -76,7 +76,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $validJson = '{"message": "test"}';
         $responseBody = new TestCommunicationsResponseBody($validJson);
-        
+
         $this->assertTrue($responseBody->isValidJson());
     }
 
@@ -84,7 +84,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $invalidJson = '{invalid}';
         $responseBody = new TestCommunicationsResponseBody($invalidJson);
-        
+
         $this->assertFalse($responseBody->isValidJson());
     }
 
@@ -93,7 +93,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
         $jsonString = '{"message": "test", "code": 200}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertIsArray($decoded);
         $this->assertEquals('test', $decoded['message']);
         $this->assertEquals(200, $decoded['code']);
@@ -103,7 +103,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": "test"}';
         $responseBody = new TestCommunicationsResponseBody($jsonString);
-        
+
         $this->assertEquals($jsonString, $responseBody->value);
     }
 
@@ -111,7 +111,7 @@ class TestCommunicationsResponseBodyTest extends TestCase
     {
         $plainText = 'This is not JSON';
         $responseBody = new TestCommunicationsResponseBody($plainText);
-        
+
         $this->assertNull($responseBody->getMessage());
     }
 }

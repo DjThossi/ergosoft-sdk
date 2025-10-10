@@ -1,9 +1,13 @@
 <?php
 
 declare(strict_types=1);
+
 namespace DjThossi\ErgosoftSdk\Domain;
 
 use ArrayIterator;
+
+use function count;
+
 use Countable;
 use IteratorAggregate;
 

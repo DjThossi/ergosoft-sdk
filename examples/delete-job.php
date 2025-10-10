@@ -21,9 +21,9 @@ try {
     $statusCode = $api->deleteJob($jobGuid);
     echo "Job with GUID {$jobGuid->value} has been deleted.\n";
     echo "Response Status Code: {$statusCode->value}\n";
-    
+
     if ($statusCode->isSuccessful()) {
-        echo "Success! ";
+        echo 'Success! ';
         if ($statusCode->isOk()) {
             echo "Job deleted (200 OK)\n";
         } elseif ($statusCode->isNoContent()) {

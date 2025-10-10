@@ -38,7 +38,7 @@ class EndpointTest extends TestCase
     {
         $this->expectException(InvalidEndpointException::class);
         $this->expectExceptionMessage('Endpoint must not be empty');
-        
+
         new Endpoint('');
     }
 
@@ -46,7 +46,7 @@ class EndpointTest extends TestCase
     {
         $this->expectException(InvalidEndpointException::class);
         $this->expectExceptionMessage('Endpoint must be a valid URL');
-        
+
         new Endpoint('not-a-valid-url');
     }
 
@@ -54,7 +54,7 @@ class EndpointTest extends TestCase
     {
         $this->expectException(InvalidEndpointException::class);
         $this->expectExceptionMessage('Endpoint must be a valid URL');
-        
+
         new Endpoint('example.com/webhook');
     }
 
@@ -62,7 +62,7 @@ class EndpointTest extends TestCase
     {
         $this->expectException(InvalidEndpointException::class);
         $this->expectExceptionMessage('Endpoint must be a valid URL');
-        
+
         new Endpoint('https://example com/webhook');
     }
 

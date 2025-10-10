@@ -25,10 +25,10 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(204);
         $this->assertFalse($statusCode->isOk());
-        
+
         $statusCode = new StatusCode(201);
         $this->assertFalse($statusCode->isOk());
-        
+
         $statusCode = new StatusCode(400);
         $this->assertFalse($statusCode->isOk());
     }
@@ -43,7 +43,7 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isNoContent());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isNoContent());
     }
@@ -58,7 +58,7 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isBadRequest());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isBadRequest());
     }
@@ -73,7 +73,7 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isForbidden());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isForbidden());
     }
@@ -88,7 +88,7 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isNotFound());
-        
+
         $statusCode = new StatusCode(400);
         $this->assertFalse($statusCode->isNotFound());
     }
@@ -150,7 +150,7 @@ class StatusCodeTest extends TestCase
     public function testMultipleMethodCallsOnSameInstance(): void
     {
         $statusCode = new StatusCode(200);
-        
+
         $this->assertTrue($statusCode->isSuccessful());
         $this->assertTrue($statusCode->isOk());
         $this->assertFalse($statusCode->isNoContent());
@@ -162,7 +162,7 @@ class StatusCodeTest extends TestCase
     public function testStatusCode404Properties(): void
     {
         $statusCode = new StatusCode(404);
-        
+
         $this->assertFalse($statusCode->isSuccessful());
         $this->assertFalse($statusCode->isOk());
         $this->assertFalse($statusCode->isNoContent());
@@ -181,10 +181,10 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isConflict());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isConflict());
-        
+
         $statusCode = new StatusCode(500);
         $this->assertFalse($statusCode->isConflict());
     }
@@ -199,10 +199,10 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isServerError());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isServerError());
-        
+
         $statusCode = new StatusCode(503);
         $this->assertFalse($statusCode->isServerError());
     }
@@ -217,10 +217,10 @@ class StatusCodeTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $this->assertFalse($statusCode->isServiceUnavailable());
-        
+
         $statusCode = new StatusCode(404);
         $this->assertFalse($statusCode->isServiceUnavailable());
-        
+
         $statusCode = new StatusCode(500);
         $this->assertFalse($statusCode->isServiceUnavailable());
     }

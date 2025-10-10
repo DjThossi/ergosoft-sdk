@@ -25,9 +25,9 @@ try {
     echo "Webhook endpoint: {$endpoint->value}\n";
     echo "Response Status Code: {$response->statusCode->value}\n";
     echo "Response Body: {$response->responseBody->value}\n\n";
-    
+
     if ($response->statusCode->isSuccessful()) {
-        echo "Success! ";
+        echo 'Success! ';
         if ($response->statusCode->isOk()) {
             echo "Unsubscription successful (200 OK)\n";
         }

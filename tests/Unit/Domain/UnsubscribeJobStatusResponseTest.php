@@ -15,9 +15,9 @@ class UnsubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new StringResponseBody('Unsubscription successful');
-        
+
         $response = new UnsubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('Unsubscription successful', $response->responseBody->value);
@@ -27,9 +27,9 @@ class UnsubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $responseBody = new StringResponseBody('');
-        
+
         $response = new UnsubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertSame($responseBody, $response->responseBody);
         $this->assertEquals('', $response->responseBody->value);
@@ -39,9 +39,9 @@ class UnsubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(400);
         $responseBody = new StringResponseBody('Bad request error message');
-        
+
         $response = new UnsubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertEquals(400, $response->statusCode->value);
         $this->assertTrue($response->statusCode->isBadRequest());
@@ -53,9 +53,9 @@ class UnsubscribeJobStatusResponseTest extends TestCase
     {
         $statusCode = new StatusCode(404);
         $responseBody = new StringResponseBody('Subscription not found');
-        
+
         $response = new UnsubscribeJobStatusResponse($statusCode, $responseBody);
-        
+
         $this->assertSame($statusCode, $response->statusCode);
         $this->assertEquals(404, $response->statusCode->value);
         $this->assertTrue($response->statusCode->isNotFound());
@@ -67,10 +67,10 @@ class UnsubscribeJobStatusResponseTest extends TestCase
     {
         $response1 = new UnsubscribeJobStatusResponse(new StatusCode(200), new StringResponseBody('Response 1'));
         $response2 = new UnsubscribeJobStatusResponse(new StatusCode(404), new StringResponseBody('Response 2'));
-        
+
         $this->assertEquals(200, $response1->statusCode->value);
         $this->assertEquals('Response 1', $response1->responseBody->value);
-        
+
         $this->assertEquals(404, $response2->statusCode->value);
         $this->assertEquals('Response 2', $response2->responseBody->value);
     }

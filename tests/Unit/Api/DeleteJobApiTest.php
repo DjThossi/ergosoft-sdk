@@ -37,7 +37,7 @@ class DeleteJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->deleteJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(200, $statusCode->value);
         $this->assertTrue($statusCode->isSuccessful());
@@ -57,7 +57,7 @@ class DeleteJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->deleteJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(204, $statusCode->value);
         $this->assertTrue($statusCode->isSuccessful());
@@ -77,7 +77,7 @@ class DeleteJobApiTest extends TestCase
             ->willReturn($expectedResponse);
 
         $statusCode = $this->api->deleteJob($jobGuid);
-        
+
         $this->assertInstanceOf(StatusCode::class, $statusCode);
         $this->assertEquals(200, $statusCode->value);
         $this->assertTrue($statusCode->isSuccessful());

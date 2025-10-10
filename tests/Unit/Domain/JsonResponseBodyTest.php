@@ -56,7 +56,7 @@ class JsonResponseBodyTest extends TestCase
         $jsonString = '{"message": "test", "code": 200}';
         $responseBody = new JsonResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertIsArray($decoded);
         $this->assertEquals('test', $decoded['message']);
         $this->assertEquals(200, $decoded['code']);
@@ -67,7 +67,7 @@ class JsonResponseBodyTest extends TestCase
         $jsonString = '{}';
         $responseBody = new JsonResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertIsArray($decoded);
         $this->assertEmpty($decoded);
     }
@@ -77,7 +77,7 @@ class JsonResponseBodyTest extends TestCase
         $jsonString = '["item1", "item2", "item3"]';
         $responseBody = new JsonResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertIsArray($decoded);
         $this->assertEquals(['item1', 'item2', 'item3'], $decoded);
     }
@@ -86,7 +86,7 @@ class JsonResponseBodyTest extends TestCase
     {
         $invalidJson = '{invalid json}';
         $responseBody = new JsonResponseBody($invalidJson);
-        
+
         $this->expectException(JsonException::class);
         $responseBody->getDecodedJson();
     }
@@ -96,7 +96,7 @@ class JsonResponseBodyTest extends TestCase
         $jsonString = '{"user": {"name": "John", "age": 30}, "items": [1, 2, 3]}';
         $responseBody = new JsonResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertIsArray($decoded);
         $this->assertEquals('John', $decoded['user']['name']);
         $this->assertEquals(30, $decoded['user']['age']);
@@ -122,7 +122,7 @@ class JsonResponseBodyTest extends TestCase
         $jsonString = '{"message": "Hëllö Wörld", "emoji": "😀"}';
         $responseBody = new JsonResponseBody($jsonString);
         $decoded = $responseBody->getDecodedJson();
-        
+
         $this->assertEquals('Hëllö Wörld', $decoded['message']);
         $this->assertEquals('😀', $decoded['emoji']);
     }
@@ -131,7 +131,7 @@ class JsonResponseBodyTest extends TestCase
     {
         $jsonString = '{"message": "test"}';
         $responseBody = new JsonResponseBody($jsonString);
-        
+
         // Test that it inherits the value property from StringResponseBody
         $this->assertEquals($jsonString, $responseBody->value);
     }

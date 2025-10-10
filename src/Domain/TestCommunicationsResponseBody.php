@@ -13,6 +13,7 @@ readonly class TestCommunicationsResponseBody extends JsonResponseBody
         }
 
         $decoded = $this->getDecodedJson();
+
         return $decoded['message'] ?? null;
     }
 }
