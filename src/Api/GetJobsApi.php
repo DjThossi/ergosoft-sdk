@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Api;
 
+use DjThossi\ErgosoftSdk\Domain\GetJobsResponse;
+use DjThossi\ErgosoftSdk\Domain\GetJobsResponseBody;
 use DjThossi\ErgosoftSdk\Domain\JobCollection;
+use DjThossi\ErgosoftSdk\Domain\StatusCode;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
 
@@ -22,10 +25,11 @@ readonly class GetJobsApi
     ) {
     }
 
-    public function getJobs(): JobCollection
+    public function getJobs(): GetJobsResponse
     {
         $response = $this->client->get(self::ENDPOINT);
-        $data = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        $responseBody = (string) $response->getBody();
+        $data = json_decode($responseBody, true, 512, JSON_THROW_ON_ERROR);
 
         $jobs = new JobCollection();
         if (is_array($data)) {
@@ -34,6 +38,10 @@ readonly class GetJobsApi
             }
         }
 
-        return $jobs;
+        return new GetJobsResponse(
+            new StatusCode($response->getStatusCode()),
+            $jobs,
+            new GetJobsResponseBody($responseBody)
+        );
     }
 }

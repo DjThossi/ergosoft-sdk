@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
+use DjThossi\ErgosoftSdk\Domain\GetJobsResponse;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobCollection;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
@@ -123,10 +124,13 @@ class GetJobsApiTest extends TestCase
 
         $result = $this->api->getJobs();
 
-        $this->assertInstanceOf(JobCollection::class, $result);
-        $this->assertCount(2, $result);
+        $this->assertInstanceOf(GetJobsResponse::class, $result);
+        $this->assertSame(200, $result->statusCode->value);
+        $this->assertInstanceOf(JobCollection::class, $result->jobs);
+        $this->assertCount(2, $result->jobs);
+        $this->assertTrue($result->responseBody->isValidJson());
 
-        $jobs = iterator_to_array($result);
+        $jobs = iterator_to_array($result->jobs);
         $this->assertSame($job1, $jobs['12345678-1234-1234-1234-123456789001']);
         $this->assertSame($job2, $jobs['12345678-1234-1234-1234-123456789002']);
     }
@@ -142,7 +146,10 @@ class GetJobsApiTest extends TestCase
 
         $result = $this->api->getJobs();
 
-        $this->assertInstanceOf(JobCollection::class, $result);
-        $this->assertCount(0, $result);
+        $this->assertInstanceOf(GetJobsResponse::class, $result);
+        $this->assertSame(200, $result->statusCode->value);
+        $this->assertInstanceOf(JobCollection::class, $result->jobs);
+        $this->assertCount(0, $result->jobs);
+        $this->assertTrue($result->responseBody->isValidJson());
     }
 }

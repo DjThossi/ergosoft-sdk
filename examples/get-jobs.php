@@ -14,8 +14,11 @@ $factory = new ErgosoftFactory($configuration);
 $api = $factory->createGetJobsApi();
 
 try {
-    $jobs = $api->getJobs();
-    foreach ($jobs as $job) {
+    $response = $api->getJobs();
+    echo "Status code: {$response->statusCode->value}\n";
+    echo "-----------------------------------\n";
+
+    foreach ($response->jobs as $job) {
         echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
         echo 'Job ID: ' . $job->getJobId()->value . "\n";
         echo 'Name: ' . ($job->getJobName()?->value ?? 'N/A') . "\n";

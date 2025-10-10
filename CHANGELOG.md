@@ -13,11 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `getShortVersion()` method that extracts text before the first space
 - New `InvalidJobStatusException` for validation errors on job status values.
 - Comprehensive unit tests for `JobStatus` covering validation and `getShortVersion()` method.
+- New `GetJobsResponse` domain object providing access to status code, job collection, and response body
+- New `GetJobsResponseBody` domain object extending `JsonResponseBody` for structured access to the raw JSON response.
+- Comprehensive unit tests for `GetJobsResponse` and updated tests for `GetJobsApi`.
 
 ### Fixed
 ### Changed
 - `Job::$jobStatus` property type changed from `string` to `JobStatus` object.
 - `Job::getJobStatus()` return type changed from `string` to `JobStatus` object.
+- `GetJobsApi::getJobs()` now returns `GetJobsResponse` instead of `JobCollection` directly, providing access to HTTP status code and raw response body alongside the job collection.
 
 ### Removed
 
@@ -27,6 +31,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Example migration:
   - Before: `echo $job->getJobStatus();`
   - After: `echo $job->getJobStatus()->value;`
+- `GetJobsApi::getJobs()` now returns `GetJobsResponse` instead of `JobCollection`. Access the job collection via `$response->jobs`.
+- Code that directly uses the result as a collection (e.g., `foreach ($api->getJobs() as $job)`) must be updated to access the `jobCollection` property.
+- Example migration:
+  - Before: `$jobs = $api->getJobs(); foreach ($jobs as $job) { ... }`
+  - After: `$response = $api->getJobs(); foreach ($response->jobs as $job) { ... }`
+- The response object now provides additional properties:
+  - `$response->statusCode` - HTTP status code as `StatusCode` object
+  - `$response->jobs` - The collection of jobs as `JobCollection` object
+  - `$response->responseBody` - Raw response body as `GetJobsResponseBody` object
 
 ## [4.2.0] - 2025-10-09
 
