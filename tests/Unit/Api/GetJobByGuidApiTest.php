@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DjThossi\ErgosoftSdk\Tests\Unit\Api;
 
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
+use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponse;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
@@ -84,7 +85,10 @@ class GetJobByGuidApiTest extends TestCase
 
         $result = $this->api->getJobByGuid($jobGuid);
 
-        $this->assertSame($job, $result);
+        $this->assertInstanceOf(GetJobByGuidResponse::class, $result);
+        $this->assertSame(200, $result->statusCode->value);
+        $this->assertSame($job, $result->job);
+        $this->assertTrue($result->responseBody->isValidJson());
     }
 
     public function testGetJobByGuidNotFound(): void

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace DjThossi\ErgosoftSdk\Api;
 
-use DjThossi\ErgosoftSdk\Domain\Job;
+use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponse;
+use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponseBody;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
+use DjThossi\ErgosoftSdk\Domain\StatusCode;
 use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
@@ -22,15 +24,22 @@ readonly class GetJobByGuidApi
     ) {
     }
 
-    public function getJobByGuid(JobGuid $jobGuid): Job
+    public function getJobByGuid(JobGuid $jobGuid): GetJobByGuidResponse
     {
         $response = $this->client->get(self::ENDPOINT . $jobGuid->value);
-        $data = json_decode((string) $response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        $responseBody = (string) $response->getBody();
+        $data = json_decode($responseBody, true, 512, JSON_THROW_ON_ERROR);
 
         if (empty($data)) {
             throw new JobNotFoundException($jobGuid->value);
         }
 
-        return $this->jobMapper->mapFromArray($data);
+        $job = $this->jobMapper->mapFromArray($data);
+
+        return new GetJobByGuidResponse(
+            new StatusCode($response->getStatusCode()),
+            $job,
+            new GetJobByGuidResponseBody($responseBody)
+        );
     }
 }

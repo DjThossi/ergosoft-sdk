@@ -18,15 +18,19 @@ $jobGuid = new JobGuid('YOUR_JOB_GUID');
 $api = $factory->createGetJobByGuidApi();
 
 try {
-    $job = $api->getJobByGuid($jobGuid);
+    $response = $api->getJobByGuid($jobGuid);
+    echo "Status code: {$response->statusCode->value}\n";
+    echo "-----------------------------------\n";
+
+    $job = $response->job;
 
     // Display job details
     echo "Job Details:\n";
     echo 'Job ID: ' . $job->getJobId()->value . "\n";
-    echo 'Name: ' . $job->getJobName()->value . "\n";
+    echo 'Name: ' . ($job->getJobName()?->value ?? 'N/A') . "\n";
     echo 'Status: ' . $job->getJobStatus()->value . "\n";
     echo 'Status Description: ' . $job->getJobStatusDescription() . "\n";
-    echo 'Created At: ' . $job->getTimeCreated()->format('Y-m-d H:i:s') . "\n";
+    echo 'Created At: ' . ($job->getTimeCreated()?->format('Y-m-d H:i:s') ?? 'Not given') . "\n";
     if ($job->getTimePrinted()) {
         echo 'Printed At: ' . $job->getTimePrinted()->format('Y-m-d H:i:s') . "\n";
     }
