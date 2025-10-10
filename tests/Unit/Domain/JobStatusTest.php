@@ -61,4 +61,52 @@ final class JobStatusTest extends TestCase
         $jobStatus = new JobStatus('PRINTING 50%');
         $this->assertSame('PRINTING', $jobStatus->getShortVersion());
     }
+
+    public function testIsDoneReturnsTrueForDoneStatus(): void
+    {
+        $jobStatus = new JobStatus('DONE');
+        $this->assertTrue($jobStatus->isDone());
+    }
+
+    public function testIsDoneReturnsTrueForDoneWithDetails(): void
+    {
+        $jobStatus = new JobStatus('DONE successfully');
+        $this->assertTrue($jobStatus->isDone());
+    }
+
+    public function testIsDoneReturnsFalseForPrintingStatus(): void
+    {
+        $jobStatus = new JobStatus('PRINTING');
+        $this->assertFalse($jobStatus->isDone());
+    }
+
+    public function testIsDoneReturnsFalseForOtherStatus(): void
+    {
+        $jobStatus = new JobStatus('RUNNING');
+        $this->assertFalse($jobStatus->isDone());
+    }
+
+    public function testIsPrintingReturnsTrueForPrintingStatus(): void
+    {
+        $jobStatus = new JobStatus('PRINTING');
+        $this->assertTrue($jobStatus->isPrinting());
+    }
+
+    public function testIsPrintingReturnsTrueForPrintingWithPercentage(): void
+    {
+        $jobStatus = new JobStatus('PRINTING 50%');
+        $this->assertTrue($jobStatus->isPrinting());
+    }
+
+    public function testIsPrintingReturnsFalseForDoneStatus(): void
+    {
+        $jobStatus = new JobStatus('DONE');
+        $this->assertFalse($jobStatus->isPrinting());
+    }
+
+    public function testIsPrintingReturnsFalseForOtherStatus(): void
+    {
+        $jobStatus = new JobStatus('RUNNING');
+        $this->assertFalse($jobStatus->isPrinting());
+    }
 }

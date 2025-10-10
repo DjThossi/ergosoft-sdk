@@ -17,6 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [5.1.0] - 2025-10-10
+
+### Added
+- New public constants in `JobStatus` for common short status values:
+  - `SHORT_PRINTING` = 'PRINTING'
+  - `SHORT_DONE` = 'DONE'
+- New convenience methods in `JobStatus` for checking job status:
+    - `isDone()` - returns true if the job status is 'DONE' (or starts with 'DONE ')
+    - `isPrinting()` - returns true if the job status is 'PRINTING' (or starts with 'PRINTING ')
+- Comprehensive unit tests for `isDone()` and `isPrinting()` methods.
+
 ## [5.0.0] - 2025-10-10
 
 ### Added
@@ -185,7 +196,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.0.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.1.0...HEAD
+[5.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.1.0
 [5.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.0.0
 [4.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.2.0
 [4.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.1.0
