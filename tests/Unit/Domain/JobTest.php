@@ -9,6 +9,7 @@ use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Domain\JobId;
 use DjThossi\ErgosoftSdk\Domain\JobName;
+use DjThossi\ErgosoftSdk\Domain\JobStatus;
 use PHPUnit\Framework\TestCase;
 
 class JobTest extends TestCase
@@ -22,7 +23,7 @@ class JobTest extends TestCase
             $jobGuid,
             $jobId,
             $jobName,
-            'RUNNING',
+            new JobStatus('RUNNING'),
             'Job is running',
             1,
             new DateTimeImmutable('2023-01-01T12:00:00Z'),
@@ -48,7 +49,7 @@ class JobTest extends TestCase
         $this->assertSame($jobGuid, $job->getJobGuid());
         $this->assertSame($jobId, $job->getJobId());
         $this->assertSame($jobName, $job->getJobName());
-        $this->assertEquals('RUNNING', $job->getJobStatus());
+        $this->assertEquals('RUNNING', $job->getJobStatus()->value);
         $this->assertEquals('Job is running', $job->getJobStatusDescription());
         $this->assertEquals(1, $job->getCopies());
         $this->assertEquals('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
@@ -77,7 +78,7 @@ class JobTest extends TestCase
             new JobGuid('12345678-1234-1234-1234-123456789012'),
             new JobId(12345),
             new JobName('Test Job'),
-            'RUNNING',
+            new JobStatus('RUNNING'),
             'Job is running',
             1,
             new DateTimeImmutable('2023-01-01T12:00:00Z'),

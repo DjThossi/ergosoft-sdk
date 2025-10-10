@@ -12,7 +12,7 @@ readonly class Job
         private JobGuid $jobGuid,
         private JobId $jobId,
         private ?JobName $jobName,
-        private string $jobStatus,
+        private JobStatus $jobStatus,
         private string $jobStatusDescription,
         private int $copies,
         private ?DateTimeImmutable $timeCreated,
@@ -51,7 +51,7 @@ readonly class Job
         return $this->jobName;
     }
 
-    public function getJobStatus(): string
+    public function getJobStatus(): JobStatus
     {
         return $this->jobStatus;
     }

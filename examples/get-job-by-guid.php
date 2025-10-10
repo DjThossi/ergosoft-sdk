@@ -24,7 +24,7 @@ try {
     echo "Job Details:\n";
     echo 'Job ID: ' . $job->getJobId()->value . "\n";
     echo 'Name: ' . $job->getJobName()->value . "\n";
-    echo 'Status: ' . $job->getJobStatus() . "\n";
+    echo 'Status: ' . $job->getJobStatus()->value . "\n";
     echo 'Status Description: ' . $job->getJobStatusDescription() . "\n";
     echo 'Created At: ' . $job->getTimeCreated()->format('Y-m-d H:i:s') . "\n";
     if ($job->getTimePrinted()) {

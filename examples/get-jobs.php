@@ -19,7 +19,7 @@ try {
         echo 'Job GUID: ' . $job->getJobGuid()->value . "\n";
         echo 'Job ID: ' . $job->getJobId()->value . "\n";
         echo 'Name: ' . ($job->getJobName()?->value ?? 'N/A') . "\n";
-        echo 'Status: ' . $job->getJobStatus() . ' (' . $job->getJobStatusDescription() . ")\n";
+        echo 'Status: ' . $job->getJobStatus()->value . ' (' . $job->getJobStatusDescription() . ")\n";
         echo 'Copies: ' . $job->getCopies() . "\n";
         echo 'Created at: ' . ($job->getTimeCreated()?->format('Y-m-d H:i:s') ?? 'Not given') . "\n";
         echo 'Job Width: ' . $job->getJobWidthMm() . " mm\n";

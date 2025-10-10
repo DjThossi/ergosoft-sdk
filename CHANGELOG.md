@@ -8,9 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- New `JobStatus` domain object for type-safe job status handling with:
+  - Non-empty validation (throws `InvalidJobStatusException` for empty or whitespace-only strings)
+  - `getShortVersion()` method that extracts text before the first space
+- New `InvalidJobStatusException` for validation errors on job status values.
+- Comprehensive unit tests for `JobStatus` covering validation and `getShortVersion()` method.
+
 ### Fixed
 ### Changed
+- `Job::$jobStatus` property type changed from `string` to `JobStatus` object.
+- `Job::getJobStatus()` return type changed from `string` to `JobStatus` object.
+
 ### Removed
+
+### Breaking Changes
+- `Job::getJobStatus()` now returns a `JobStatus` object instead of a string. Access the string value via `$job->getJobStatus()->value`.
+- Code that directly accesses job status as a string (e.g., `$status = $job->getJobStatus()`) must be updated to use `$job->getJobStatus()->value`.
+- Example migration:
+  - Before: `echo $job->getJobStatus();`
+  - After: `echo $job->getJobStatus()->value;`
 
 ## [4.2.0] - 2025-10-09
 

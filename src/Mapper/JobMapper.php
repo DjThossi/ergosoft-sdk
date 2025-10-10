@@ -11,6 +11,7 @@ use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Domain\JobId;
 use DjThossi\ErgosoftSdk\Domain\JobName;
+use DjThossi\ErgosoftSdk\Domain\JobStatus;
 use DjThossi\ErgosoftSdk\Exception\MissingRequiredFieldsException;
 
 readonly class JobMapper
@@ -92,7 +93,7 @@ readonly class JobMapper
             jobGuid: new JobGuid($data[self::FIELD_JOB_GUID]),
             jobId: new JobId($data[self::FIELD_JOB_ID]),
             jobName: $jobName,
-            jobStatus: $data[self::FIELD_JOB_STATUS],
+            jobStatus: new JobStatus($data[self::FIELD_JOB_STATUS]),
             jobStatusDescription: $data[self::FIELD_JOB_STATUS_DESCRIPTION],
             copies: $data[self::FIELD_COPIES],
             timeCreated: $timeCreated,

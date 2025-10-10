@@ -11,6 +11,7 @@ use DjThossi\ErgosoftSdk\Domain\JobCollection;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Domain\JobId;
 use DjThossi\ErgosoftSdk\Domain\JobName;
+use DjThossi\ErgosoftSdk\Domain\JobStatus;
 use PHPUnit\Framework\TestCase;
 
 class JobCollectionTest extends TestCase
@@ -273,7 +274,7 @@ class JobCollectionTest extends TestCase
             jobGuid: new JobGuid($guidValue),
             jobId: new JobId($jobIdValue),
             jobName: new JobName($jobNameValue),
-            jobStatus: 'RUNNING',
+            jobStatus: new JobStatus('RUNNING'),
             jobStatusDescription: 'Job is running',
             copies: 1,
             timeCreated: new DateTimeImmutable('2023-01-01T12:00:00Z'),

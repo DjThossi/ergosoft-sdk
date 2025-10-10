@@ -60,7 +60,7 @@ class JobMapperTest extends TestCase
         $this->assertEquals($jobGuid, $job->getJobGuid());
         $this->assertEquals($jobId, $job->getJobId());
         $this->assertEquals($jobName, $job->getJobName());
-        $this->assertSame('RUNNING', $job->getJobStatus());
+        $this->assertSame('RUNNING', $job->getJobStatus()->value);
         $this->assertSame('Job is running', $job->getJobStatusDescription());
         $this->assertSame(1, $job->getCopies());
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
@@ -123,7 +123,7 @@ class JobMapperTest extends TestCase
         $this->assertEquals($jobGuid, $job->getJobGuid());
         $this->assertEquals($jobId, $job->getJobId());
         $this->assertEquals($jobName, $job->getJobName());
-        $this->assertSame('RUNNING', $job->getJobStatus());
+        $this->assertSame('RUNNING', $job->getJobStatus()->value);
         $this->assertSame('Job is running', $job->getJobStatusDescription());
         $this->assertSame(1, $job->getCopies());
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
@@ -185,7 +185,7 @@ class JobMapperTest extends TestCase
         $this->assertEquals($jobGuid, $job->getJobGuid());
         $this->assertEquals($jobId, $job->getJobId());
         $this->assertEquals($jobName, $job->getJobName());
-        $this->assertSame('RUNNING', $job->getJobStatus());
+        $this->assertSame('RUNNING', $job->getJobStatus()->value);
         $this->assertSame('Job is running', $job->getJobStatusDescription());
         $this->assertSame(1, $job->getCopies());
         $this->assertSame('2023-01-01T12:00:00Z', $job->getTimeCreated()->format('Y-m-d\TH:i:s\Z'));
