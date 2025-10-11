@@ -17,6 +17,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [6.0.0] - 2025-10-11
+
+### Added
+- New `hasJob()` method in `GetJobByGuidResponse` to check if a job is present in the response.
+
+### Changed
+- `GetJobByGuidApi::getJobByGuid()` no longer throws `JobNotFoundException`. Instead, it returns a `GetJobByGuidResponse` with a null `job` property and appropriate status code when a job is not found or an error occurs.
+- `GetJobByGuidApi::getJobByGuid()` now handles `BadResponseException` gracefully and returns error responses with status code and response body.
+
+### Removed
+- Removed `JobNotFoundException` - no longer thrown by `GetJobByGuidApi::getJobByGuid()`.
+- Removed deprecated constants from `JobStatus`:
+  - `SHORT_PRINTING` (use `PRINTING` instead)
+  - `SHORT_DONE` (use `DONE` instead)
+- Removed deprecated method `JobStatus::getShortVersion()` (use `JobStatus::$value` property instead).
+
+### Breaking Changes
+- `GetJobByGuidApi::getJobByGuid()` no longer throws `JobNotFoundException`. Code that catches this exception must be updated to check `$response->hasJob()` or `$response->job === null` instead.
+- Example migration:
+  - Before: `try { $response = $api->getJobByGuid($jobGuid); $job = $response->job; } catch (JobNotFoundException $e) { ... }`
+  - After: `$response = $api->getJobByGuid($jobGuid); if ($response->hasJob()) { $job = $response->job; } else { ... }`
+- `JobStatus::SHORT_PRINTING` and `JobStatus::SHORT_DONE` constants have been removed. Use `JobStatus::PRINTING` and `JobStatus::DONE` instead.
+- `JobStatus::getShortVersion()` method has been removed. Use the `$value` property directly instead.
+- Example migration:
+  - Before: `$shortVersion = $jobStatus->getShortVersion();`
+  - After: `$value = $jobStatus->value;`
+
 ## [5.3.0] - 2025-10-11
 
 ### Added
@@ -220,7 +247,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.2.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.0.0
+[5.3.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.3.0
 [5.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.2.0
 [5.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.1.0
 [5.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.0.0

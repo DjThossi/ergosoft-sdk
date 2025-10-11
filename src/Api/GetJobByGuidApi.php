@@ -8,9 +8,9 @@ use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponse;
 use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponseBody;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
 use DjThossi\ErgosoftSdk\Domain\StatusCode;
-use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
+use GuzzleHttp\Exception\BadResponseException;
 
 use const JSON_THROW_ON_ERROR;
 
@@ -26,12 +26,24 @@ readonly class GetJobByGuidApi
 
     public function getJobByGuid(JobGuid $jobGuid): GetJobByGuidResponse
     {
-        $response = $this->client->get(self::ENDPOINT . $jobGuid->value);
+        try {
+            $response = $this->client->get(self::ENDPOINT . $jobGuid->value);
+        } catch (BadResponseException $e) {
+            return new GetJobByGuidResponse(
+                new StatusCode($e->getCode()),
+                null,
+                new GetJobByGuidResponseBody($e->getResponse()->getBody()->getContents())
+            );
+        }
         $responseBody = (string) $response->getBody();
         $data = json_decode($responseBody, true, 512, JSON_THROW_ON_ERROR);
 
         if (empty($data)) {
-            throw new JobNotFoundException($jobGuid->value);
+            return new GetJobByGuidResponse(
+                new StatusCode($response->getStatusCode()),
+                null,
+                new GetJobByGuidResponseBody($responseBody)
+            );
         }
 
         $job = $this->jobMapper->mapFromArray($data);

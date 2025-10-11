@@ -32,36 +32,6 @@ final class JobStatusTest extends TestCase
         new JobStatus('   ');
     }
 
-    public function testGetShortVersionWithoutSpace(): void
-    {
-        $jobStatus = new JobStatus('RUNNING');
-        $this->assertSame('RUNNING', $jobStatus->getShortVersion());
-    }
-
-    public function testGetShortVersionWithSpace(): void
-    {
-        $jobStatus = new JobStatus('RUNNING something');
-        $this->assertSame('RUNNING', $jobStatus->getShortVersion());
-    }
-
-    public function testGetShortVersionWithMultipleSpaces(): void
-    {
-        $jobStatus = new JobStatus('RUNNING something else');
-        $this->assertSame('RUNNING', $jobStatus->getShortVersion());
-    }
-
-    public function testGetShortVersionWithLeadingSpace(): void
-    {
-        $jobStatus = new JobStatus(' RUNNING');
-        $this->assertSame('', $jobStatus->getShortVersion());
-    }
-
-    public function testGetShortVersionWithComplexStatus(): void
-    {
-        $jobStatus = new JobStatus('PRINTING 50%');
-        $this->assertSame('PRINTING', $jobStatus->getShortVersion());
-    }
-
     public function testIsDoneReturnsTrueForDoneStatus(): void
     {
         $jobStatus = new JobStatus(JobStatus::DONE);

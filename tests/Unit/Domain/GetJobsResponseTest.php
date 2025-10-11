@@ -36,7 +36,7 @@ class GetJobsResponseTest extends TestCase
     {
         $statusCode = new StatusCode(200);
         $jobCollection = new JobCollection();
-        
+
         $job = new Job(
             new JobGuid('12345678-1234-1234-1234-123456789012'),
             new JobId(1),
@@ -63,9 +63,9 @@ class GetJobsResponseTest extends TestCase
             'ripped',
             'journal'
         );
-        
+
         $jobCollection->add($job);
-        
+
         $responseBody = new GetJobsResponseBody('[{"jobGuid":"12345678-1234-1234-1234-123456789012"}]');
 
         $response = new GetJobsResponse($statusCode, $jobCollection, $responseBody);
@@ -95,7 +95,7 @@ class GetJobsResponseTest extends TestCase
     {
         $collection1 = new JobCollection();
         $collection2 = new JobCollection();
-        
+
         $response1 = new GetJobsResponse(
             new StatusCode(200),
             $collection1,

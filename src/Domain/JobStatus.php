@@ -8,12 +8,6 @@ use DjThossi\ErgosoftSdk\Exception\InvalidJobStatusException;
 
 readonly class JobStatus
 {
-    /* @deprecated use PRINTING instead */
-    public const string SHORT_PRINTING = 'PRINTING';
-
-    /* @deprecated use DONE instead */
-    public const string SHORT_DONE = 'DONE';
-
     public const string WAITING_FOR_SUBMISSION = 'WAITINGFORSUBMISSION';
     public const string RIPPING = 'RIPPING';
     public const string PRINTING = 'PRINTING';
@@ -23,19 +17,6 @@ readonly class JobStatus
         public string $value,
     ) {
         $this->ensure($value);
-    }
-
-    /* @deprecated use value instead */
-    public function getShortVersion(): string
-    {
-        $stateShortVersion = $this->value;
-        $spacePosition = strpos($stateShortVersion, ' ');
-
-        return $spacePosition !== false ? substr(
-            $stateShortVersion,
-            0,
-            $spacePosition
-        ) : $stateShortVersion;
     }
 
     public function isWaitingForSubmission(): bool

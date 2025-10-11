@@ -8,17 +8,16 @@ use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Domain\GetJobByGuidResponse;
 use DjThossi\ErgosoftSdk\Domain\Job;
 use DjThossi\ErgosoftSdk\Domain\JobGuid;
-use DjThossi\ErgosoftSdk\Exception\JobNotFoundException;
 use DjThossi\ErgosoftSdk\Http\Client;
 use DjThossi\ErgosoftSdk\Mapper\JobMapper;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 
 use const JSON_THROW_ON_ERROR;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
-use function sprintf;
 
 class GetJobByGuidApiTest extends TestCase
 {
@@ -91,7 +90,7 @@ class GetJobByGuidApiTest extends TestCase
         $this->assertTrue($result->responseBody->isValidJson());
     }
 
-    public function testGetJobByGuidNotFound(): void
+    public function testGetJobByGuidNotFoundReturnsNullJob(): void
     {
         $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
         $expectedResponse = new Response(200, [], json_encode([], JSON_THROW_ON_ERROR));
@@ -104,9 +103,72 @@ class GetJobByGuidApiTest extends TestCase
         $this->jobMapper->expects($this->never())
             ->method('mapFromArray');
 
-        $this->expectException(JobNotFoundException::class);
-        $this->expectExceptionMessage(sprintf('Job with GUID "%s" not found', $jobGuid->value));
+        $result = $this->api->getJobByGuid($jobGuid);
 
-        $this->api->getJobByGuid($jobGuid);
+        $this->assertInstanceOf(GetJobByGuidResponse::class, $result);
+        $this->assertSame(200, $result->statusCode->value);
+        $this->assertNull($result->job);
+        $this->assertFalse($result->hasJob());
+        $this->assertTrue($result->responseBody->isValidJson());
+    }
+
+    public function testGetJobByGuidHandlesBadResponseException(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $errorBody = '"Job not found"';
+        $errorResponse = new Response(404, [], $errorBody);
+        $request = new Request('GET', '/Trickle/get-job-by-guid/' . $jobGuid->value);
+
+        $exception = new BadResponseException(
+            'Not Found',
+            $request,
+            $errorResponse
+        );
+
+        $this->client->expects($this->once())
+            ->method('get')
+            ->with('/Trickle/get-job-by-guid/' . $jobGuid->value)
+            ->willThrowException($exception);
+
+        $this->jobMapper->expects($this->never())
+            ->method('mapFromArray');
+
+        $result = $this->api->getJobByGuid($jobGuid);
+
+        $this->assertInstanceOf(GetJobByGuidResponse::class, $result);
+        $this->assertSame(404, $result->statusCode->value);
+        $this->assertNull($result->job);
+        $this->assertFalse($result->hasJob());
+        $this->assertEquals($errorBody, $result->responseBody->value);
+    }
+
+    public function testGetJobByGuidHandlesBadResponseExceptionWithDifferentStatusCode(): void
+    {
+        $jobGuid = new JobGuid('12345678-1234-1234-1234-123456789012');
+        $errorBody = '{"error":"Internal Server Error"}';
+        $errorResponse = new Response(500, [], $errorBody);
+        $request = new Request('GET', '/Trickle/get-job-by-guid/' . $jobGuid->value);
+
+        $exception = new BadResponseException(
+            'Server Error',
+            $request,
+            $errorResponse
+        );
+
+        $this->client->expects($this->once())
+            ->method('get')
+            ->with('/Trickle/get-job-by-guid/' . $jobGuid->value)
+            ->willThrowException($exception);
+
+        $this->jobMapper->expects($this->never())
+            ->method('mapFromArray');
+
+        $result = $this->api->getJobByGuid($jobGuid);
+
+        $this->assertInstanceOf(GetJobByGuidResponse::class, $result);
+        $this->assertSame(500, $result->statusCode->value);
+        $this->assertNull($result->job);
+        $this->assertFalse($result->hasJob());
+        $this->assertEquals($errorBody, $result->responseBody->value);
     }
 }

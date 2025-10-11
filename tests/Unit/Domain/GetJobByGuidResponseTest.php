@@ -75,10 +75,59 @@ class GetJobByGuidResponseTest extends TestCase
         );
 
         $this->assertEquals(200, $response1->statusCode->value);
+        $this->assertNotNull($response1->job);
         $this->assertEquals('12345678-1234-1234-1234-123456789001', $response1->job->getJobGuid()->value);
 
         $this->assertEquals(404, $response2->statusCode->value);
+        $this->assertNotNull($response2->job);
         $this->assertEquals('22345678-1234-1234-1234-123456789002', $response2->job->getJobGuid()->value);
+    }
+
+    public function testConstructorWithNullJob(): void
+    {
+        $statusCode = new StatusCode(404);
+        $responseBody = new GetJobByGuidResponseBody('{"error":"Job not found"}');
+
+        $response = new GetJobByGuidResponse($statusCode, null, $responseBody);
+
+        $this->assertSame($statusCode, $response->statusCode);
+        $this->assertNull($response->job);
+        $this->assertSame($responseBody, $response->responseBody);
+        $this->assertEquals(404, $response->statusCode->value);
+    }
+
+    public function testHasJobReturnsTrueWhenJobExists(): void
+    {
+        $statusCode = new StatusCode(200);
+        $job = $this->createJob('12345678-1234-1234-1234-123456789012', 1, 'Test Job');
+        $responseBody = new GetJobByGuidResponseBody('{"jobGuid":"12345678-1234-1234-1234-123456789012"}');
+
+        $response = new GetJobByGuidResponse($statusCode, $job, $responseBody);
+
+        $this->assertTrue($response->hasJob());
+    }
+
+    public function testHasJobReturnsFalseWhenJobIsNull(): void
+    {
+        $statusCode = new StatusCode(404);
+        $responseBody = new GetJobByGuidResponseBody('"Job not found"');
+
+        $response = new GetJobByGuidResponse($statusCode, null, $responseBody);
+
+        $this->assertFalse($response->hasJob());
+    }
+
+    public function testResponseWithNullJobAndEmptyData(): void
+    {
+        $statusCode = new StatusCode(200);
+        $responseBody = new GetJobByGuidResponseBody('[]');
+
+        $response = new GetJobByGuidResponse($statusCode, null, $responseBody);
+
+        $this->assertEquals(200, $response->statusCode->value);
+        $this->assertNull($response->job);
+        $this->assertFalse($response->hasJob());
+        $this->assertTrue($response->responseBody->isValidJson());
     }
 
     private function createJob(string $guidValue, int $jobIdValue, string $jobNameValue): Job

@@ -8,8 +8,13 @@ readonly class GetJobByGuidResponse
 {
     public function __construct(
         public StatusCode $statusCode,
-        public Job $job,
+        public ?Job $job,
         public GetJobByGuidResponseBody $responseBody,
     ) {
+    }
+
+    public function hasJob(): bool
+    {
+        return $this->job !== null;
     }
 }
