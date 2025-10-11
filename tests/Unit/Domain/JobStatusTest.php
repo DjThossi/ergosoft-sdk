@@ -64,49 +64,49 @@ final class JobStatusTest extends TestCase
 
     public function testIsDoneReturnsTrueForDoneStatus(): void
     {
-        $jobStatus = new JobStatus('DONE');
+        $jobStatus = new JobStatus(JobStatus::DONE);
         $this->assertTrue($jobStatus->isDone());
-    }
-
-    public function testIsDoneReturnsTrueForDoneWithDetails(): void
-    {
-        $jobStatus = new JobStatus('DONE successfully');
-        $this->assertTrue($jobStatus->isDone());
-    }
-
-    public function testIsDoneReturnsFalseForPrintingStatus(): void
-    {
-        $jobStatus = new JobStatus('PRINTING');
-        $this->assertFalse($jobStatus->isDone());
     }
 
     public function testIsDoneReturnsFalseForOtherStatus(): void
     {
-        $jobStatus = new JobStatus('RUNNING');
+        $jobStatus = new JobStatus(JobStatus::WAITING_FOR_SUBMISSION);
         $this->assertFalse($jobStatus->isDone());
     }
 
     public function testIsPrintingReturnsTrueForPrintingStatus(): void
     {
-        $jobStatus = new JobStatus('PRINTING');
+        $jobStatus = new JobStatus(JobStatus::PRINTING);
         $this->assertTrue($jobStatus->isPrinting());
-    }
-
-    public function testIsPrintingReturnsTrueForPrintingWithPercentage(): void
-    {
-        $jobStatus = new JobStatus('PRINTING 50%');
-        $this->assertTrue($jobStatus->isPrinting());
-    }
-
-    public function testIsPrintingReturnsFalseForDoneStatus(): void
-    {
-        $jobStatus = new JobStatus('DONE');
-        $this->assertFalse($jobStatus->isPrinting());
     }
 
     public function testIsPrintingReturnsFalseForOtherStatus(): void
     {
-        $jobStatus = new JobStatus('RUNNING');
+        $jobStatus = new JobStatus(JobStatus::WAITING_FOR_SUBMISSION);
         $this->assertFalse($jobStatus->isPrinting());
+    }
+
+    public function testIsRippingReturnsTrueForRippingStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::RIPPING);
+        $this->assertTrue($jobStatus->isRipping());
+    }
+
+    public function testIsRippingReturnsFalseForOtherStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::WAITING_FOR_SUBMISSION);
+        $this->assertFalse($jobStatus->isRipping());
+    }
+
+    public function testIsWaitingForSubmissionReturnsTrueForWaitingForSubmissionStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::WAITING_FOR_SUBMISSION);
+        $this->assertTrue($jobStatus->isWaitingForSubmission());
+    }
+
+    public function testIsWaitingForSubmissionReturnsFalseForOtherStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::DONE);
+        $this->assertFalse($jobStatus->isWaitingForSubmission());
     }
 }

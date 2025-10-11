@@ -14,6 +14,7 @@ readonly class JobStatus
     /* @deprecated use DONE instead */
     public const string SHORT_DONE = 'DONE';
 
+    public const string WAITING_FOR_SUBMISSION = 'WAITINGFORSUBMISSION';
     public const string RIPPING = 'RIPPING';
     public const string PRINTING = 'PRINTING';
     public const string DONE = 'DONE';
@@ -35,6 +36,11 @@ readonly class JobStatus
             0,
             $spacePosition
         ) : $stateShortVersion;
+    }
+
+    public function isWaitingForSubmission(): bool
+    {
+        return $this->value === self::WAITING_FOR_SUBMISSION;
     }
 
     public function isRipping(): bool

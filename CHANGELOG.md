@@ -17,6 +17,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [5.3.0] - 2025-10-11
+
+### Added
+- New public constant in `JobStatus` for common status values:
+    - `WAITING_FOR_SUBMISSION` = 'WAITINGFORSUBMISSION'
+- New convenience methods in `JobStatus` for checking job status:
+    - `isWaitingForSubmission()` - returns true if the job status is 'WAITINGFORSUBMISSION'
+
 ## [5.2.0] - 2025-10-11
 
 ### Added
