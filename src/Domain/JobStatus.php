@@ -8,8 +8,15 @@ use DjThossi\ErgosoftSdk\Exception\InvalidJobStatusException;
 
 readonly class JobStatus
 {
+    /* @deprecated use PRINTING instead */
     public const string SHORT_PRINTING = 'PRINTING';
+
+    /* @deprecated use DONE instead */
     public const string SHORT_DONE = 'DONE';
+
+    public const string RIPPING = 'RIPPING';
+    public const string PRINTING = 'PRINTING';
+    public const string DONE = 'DONE';
 
     public function __construct(
         public string $value,
@@ -17,6 +24,7 @@ readonly class JobStatus
         $this->ensure($value);
     }
 
+    /* @deprecated use value instead */
     public function getShortVersion(): string
     {
         $stateShortVersion = $this->value;
@@ -29,14 +37,19 @@ readonly class JobStatus
         ) : $stateShortVersion;
     }
 
-    public function isDone(): bool
+    public function isRipping(): bool
     {
-        return $this->getShortVersion() === self::SHORT_DONE;
+        return $this->value === self::RIPPING;
     }
 
     public function isPrinting(): bool
     {
-        return $this->getShortVersion() === self::SHORT_PRINTING;
+        return $this->value === self::PRINTING;
+    }
+
+    public function isDone(): bool
+    {
+        return $this->value === self::DONE;
     }
 
     private function ensure(string $value): void
