@@ -17,6 +17,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [5.2.0] - 2025-10-11
+
+### Added
+- New public constants in `JobStatus` for common status values:
+    - `RIPPING` = 'RIPPING'
+    - `PRINTING` = 'PRINTING'
+    - `DONE` = 'DONE'
+- New convenience methods in `JobStatus` for checking job status:
+    - `isRipping()` - returns true if the job status is 'RIPPING'
+
+### Changed
+- Deprecated SHORT_ constants in `JobStatus`
+    - Replace `PRINTING` with `SHORT_PRINTING`
+    - Replace `DONE` with `SHORT_DONE`
+- Deprecated `JobStatus->getShortVersion()` use `JobStatus->value` instead.
+
 ## [5.1.0] - 2025-10-10
 
 ### Added
@@ -196,7 +212,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.1.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/5.2.0...HEAD
+[5.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.2.0
 [5.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.1.0
 [5.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.0.0
 [4.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/4.2.0
