@@ -17,6 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [6.1.0] - 2025-10-27
+
+### Added
+- New `MoveUpJobPositionInQueueApi` endpoint for moving up a job's position in the queue via `/Trickle/move-up-job-position-in-queue/{jobGuidMoveUp}/{jobGuidMoveDown}` using PUT method.
+- New `MoveUpJobPositionInQueueResponse` domain object providing access to both status code and response body.
+- New `MoveUpJobPositionInQueueResponseBody` domain object extending `JsonResponseBody` for structured access to the raw JSON response.
+- New `createMoveUpJobPositionInQueueApi()` factory method in `ErgosoftFactory`.
+- Example file `examples/move-up-job-position-in-queue.php` demonstrating usage.
+
 ## [6.0.0] - 2025-10-11
 
 ### Added
@@ -247,7 +256,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/6.0.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/6.1.0...HEAD
+[6.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.1.0
 [6.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.0.0
 [5.3.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.3.0
 [5.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.2.0

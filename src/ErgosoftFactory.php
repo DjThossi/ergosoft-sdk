@@ -9,6 +9,7 @@ use DjThossi\ErgosoftSdk\Api\CancelRippingJobApi;
 use DjThossi\ErgosoftSdk\Api\DeleteJobApi;
 use DjThossi\ErgosoftSdk\Api\GetJobByGuidApi;
 use DjThossi\ErgosoftSdk\Api\GetJobsApi;
+use DjThossi\ErgosoftSdk\Api\MoveUpJobPositionInQueueApi;
 use DjThossi\ErgosoftSdk\Api\SubmitDeltaXmlFileApi;
 use DjThossi\ErgosoftSdk\Api\SubscribeJobStatusApi;
 use DjThossi\ErgosoftSdk\Api\TestCommunicationsApi;
@@ -84,6 +85,13 @@ readonly class ErgosoftFactory
     public function createTestCommunicationsApi(): TestCommunicationsApi
     {
         return new TestCommunicationsApi(
+            $this->createClient()
+        );
+    }
+
+    public function createMoveUpJobPositionInQueueApi(): MoveUpJobPositionInQueueApi
+    {
+        return new MoveUpJobPositionInQueueApi(
             $this->createClient()
         );
     }

@@ -9,6 +9,7 @@ This library is supporting the following endpoints at the moment
 - /Trickle/delete-job
 - /Trickle/get-job-by-guid
 - /Trickle/get-jobs
+- /Trickle/move-up-job-position-in-queue
 - /Trickle/submit-delta-xml-file
 - /Trickle/subscribe-job-status
 - /Trickle/test-communications
