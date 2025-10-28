@@ -79,4 +79,16 @@ final class JobStatusTest extends TestCase
         $jobStatus = new JobStatus(JobStatus::DONE);
         $this->assertFalse($jobStatus->isWaitingForSubmission());
     }
+
+    public function testIsWaitingForRipReturnsTrueForWaitingForRipStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::WAITING_FOR_RIP);
+        $this->assertTrue($jobStatus->isWaitingForRip());
+    }
+
+    public function testIsWaitingForRipReturnsFalseForOtherStatus(): void
+    {
+        $jobStatus = new JobStatus(JobStatus::DONE);
+        $this->assertFalse($jobStatus->isWaitingForRip());
+    }
 }

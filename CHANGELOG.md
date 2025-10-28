@@ -17,6 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+## [6.2.0] - 2025-10-28
+
+### Added
+- New const `JobStatus::WAITING_FOR_RIP` and new Method `isWaitingForRip()` in `JobStatus` class.
+
 ## [6.1.0] - 2025-10-27
 
 ### Added
@@ -256,7 +261,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Endpoint get-jobs
 - Add Endpoint get-job-by-guid
 
-[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/6.1.0...HEAD
+[unreleased]: https://github.com/DjThossi/ergosoft-sdk/compare/6.2.0...HEAD
+[6.2.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.2.0
 [6.1.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.1.0
 [6.0.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/6.0.0
 [5.3.0]: https://github.com/DjThossi/ergosoft-sdk/releases/tag/5.3.0

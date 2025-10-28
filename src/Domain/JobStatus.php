@@ -9,6 +9,7 @@ use DjThossi\ErgosoftSdk\Exception\InvalidJobStatusException;
 readonly class JobStatus
 {
     public const string WAITING_FOR_SUBMISSION = 'WAITINGFORSUBMISSION';
+    public const string WAITING_FOR_RIP = 'WAITINGFORRIP';
     public const string RIPPING = 'RIPPING';
     public const string PRINTING = 'PRINTING';
     public const string DONE = 'DONE';
@@ -22,6 +23,11 @@ readonly class JobStatus
     public function isWaitingForSubmission(): bool
     {
         return $this->value === self::WAITING_FOR_SUBMISSION;
+    }
+
+    public function isWaitingForRip(): bool
+    {
+        return $this->value === self::WAITING_FOR_RIP;
     }
 
     public function isRipping(): bool
